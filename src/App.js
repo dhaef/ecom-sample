@@ -19,41 +19,32 @@ function App() {
   const [currentProducts, setCurrentProducts] = useState([]);
   const [hasBeenFiltered, setHasBeenFiltered] = useState(false);
 
-  const filterSearch = (e) => {
-    if (e === '') {
-      setHasBeenFiltered(false);
-    } else {
-      setHasBeenFiltered(true);
-    }
-    let filtered = [];
-    products.map(product => {
-      if (product.name.includes(e) || product.category.includes(e)) {
-        filtered.push(product);
-      }
-    });
-    setCurrentProducts(filtered);
-  }
+  const handleFilterSubmit = (options) => {
+    let filtered = products.slice();
+    
+    if (options.search) {
+      filtered = filtered.filter(product => {
+        if (product.name.includes(options.search) || product.category.includes(options.search)) {
+          return product;
+        }
+      });
+    };
 
-  const filterSlider = (e) => {
-    let filtered = [];
-    if (hasBeenFiltered) {
-      currentProducts.map(product => {
-        if (product.price <= e) {
-          filtered.push(product);
-        }
-      });
-    } else {
-      products.map(product => {
-        if (product.price <= e) {
-          filtered.push(product);
-        }
-      });
-    }
+    if (options.price != 30) {
+      filtered = filtered.filter(product => product.price < options.price);
+    };
+
+    setHasBeenFiltered(true);
     setCurrentProducts(filtered);
+  };
+
+  const clearFilter = () => {
+    setCurrentProducts([]);
+    setHasBeenFiltered(false);
   }
 
   let productsToDisplay;
-  if (currentProducts.length > 0) {
+  if (hasBeenFiltered === true) {
     productsToDisplay = currentProducts;
   } else {
     productsToDisplay = products;
@@ -66,10 +57,10 @@ function App() {
         <div className="row">
           <div className="col-3">
             <h1>Filter</h1>
-            <FilterOptions filterSearch={filterSearch} filterSlider={filterSlider} />
+            <FilterOptions handleFilterSubmit={handleFilterSubmit} clearFilter={clearFilter} />
           </div>
           <div className="col-9">
-            <ItemContainer products={productsToDisplay} />
+            <ItemContainer products={productsToDisplay} hasBeenFiltered={hasBeenFiltered} />
           </div>
         </div>
       </div>
