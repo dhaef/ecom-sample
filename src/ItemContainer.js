@@ -12,9 +12,9 @@ export class ItemContainer extends Component {
 
     handleDisplay() {
         if (this.props.hasBeenFiltered === false) {
-            return this.props.products.map(product => <Item key={product.product_id} product={product} addToCart={this.props.addToCart} />)
+            return this.props.products.map(product => <Item key={product.product_id} product={product} addToCart={this.props.addToCart} setCurrentSize={this.props.setCurrentSize} size={this.props.size} />)
         } else if (this.props.hasBeenFiltered === true && this.props.products.length > 0) {
-            return this.props.products.map(product => <Item key={product.product_id} product={product} addToCart={this.props.addToCart} />)
+            return this.props.products.map(product => <Item key={product.product_id} product={product} addToCart={this.props.addToCart} setCurrentSize={this.props.setCurrentSize} size={this.props.size} />)
         } else if (this.props.hasBeenFiltered === true && this.props.products.length === 0) {
             return <h5>No items found</h5>
         }

@@ -6,3 +6,14 @@
     text-decoration: line-through;
     color: lightgray;
 }
+
+.cursor {
+    cursor: pointer;
+}
+
+.size {
+    color: darkgray;
+    /* background-color: darkgray; */
+    /* border-radius: 10rem; */
+    /* padding: .2rem */
+}

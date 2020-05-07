@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './Navbar';
 import ItemContainer from './ItemContainer';
 import FilterOptions from './FilterOptions';
+import Cart from './Cart';
 
 function App() {
   const [products, setProducts] = useState([
@@ -19,6 +20,8 @@ function App() {
   const [currentProducts, setCurrentProducts] = useState([]);
   const [hasBeenFiltered, setHasBeenFiltered] = useState(false);
   const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
+  const [size, setSize] = useState({ size: null, id: null });
 
   const handleFilterSubmit = (options) => {
     let filtered = products.slice();
@@ -58,11 +61,31 @@ function App() {
   };
 
   const addToCart = item => {
-    const currentCart = cart;
-    const itemToAdd = products.find(product => product.product_id == item);
-    currentCart.push(itemToAdd);
-    setCart(currentCart);
+    if (size.size === null || size.id !== item) {
+      alert('Please select a size for this item');
+      return;
+    } else {
+      const currentCart = cart;
+      const itemToAdd = products.find(product => product.product_id == item);
+      itemToAdd.customerSize = size.size;
+      currentCart.push(itemToAdd);
+      setCart(currentCart);
+      setSize({ size: null, id: null })
+    }
   };
+
+  const removeFromCart = itemId => {
+    const item = cart.find(product => product.product_id == itemId);
+    const updatedCart = cart.filter(cartItem => cartItem.product_id !== item.product_id);
+    setCart(updatedCart);
+  };
+
+  const handleShowCart = () => setShowCart(true);
+  const handleCloseCart = () => setShowCart(false);
+
+  const setCurrentSize = (currentSize, id) => {
+    setSize({ size: currentSize , id: id });
+  }
 
   let productsToDisplay;
   if (hasBeenFiltered === true) {
@@ -73,7 +96,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar cart={cart} />
+      <Navbar cart={cart} handleShow={handleShowCart} />
       <div className="container" style={{ marginTop: '.5rem' }}>
         <div className="row">
           <div className="col-3 container">
@@ -83,7 +106,14 @@ function App() {
             <FilterOptions handleFilterSubmit={handleFilterSubmit} clearFilter={clearFilter} />
           </div>
           <div className="col-9">
-            <ItemContainer products={productsToDisplay} hasBeenFiltered={hasBeenFiltered} addToCart={addToCart} />
+            <Cart show={showCart} handleClose={handleCloseCart} removeFromCart={removeFromCart} cart={cart} />
+            <ItemContainer 
+              products={productsToDisplay} 
+              hasBeenFiltered={hasBeenFiltered} 
+              addToCart={addToCart} 
+              setCurrentSize={setCurrentSize} 
+              size={size}
+            />
           </div>
         </div>
       </div>
