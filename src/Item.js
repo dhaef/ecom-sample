@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Item = props => {
+    const [numberOfItems, setNumberOfItems] = useState({ number: 1, id: null });
 
     const pickSizeToColor = sizeToColor => {
         if (props.size.id == props.product.product_id && sizeToColor == props.size.size) {
@@ -36,8 +37,30 @@ const Item = props => {
                             L
                     </span>
                 </p>
+                <div className="card-text">
+                    <span>Quantity: </span>
+                    <select id={props.product.product_id} onChange={e => setNumberOfItems({ number: e.target.value, id: e.target.id })}>
+                        <option value="1">
+                            1
+                        </option>
+                        <option value="2">
+                            2
+                        </option>
+                        <option value="3">
+                            3
+                        </option>
+                    </select>
+                </div>
                 <p className="card-text">Price: ${props.product.price}</p>
-                <button className="btn btn-light" id={props.product.product_id} onClick={(e)=>props.addToCart(e.target.id)}>Add to 🛒</button>
+                <button 
+                    className="btn btn-light" 
+                    id={props.product.product_id} 
+                    onClick={(e)=> {
+                        props.addToCart(e.target.id, numberOfItems);
+                        setNumberOfItems({ number: 1, id: null });
+                    }}
+                    >Add to 🛒
+                </button>
             </div>
         </div>
     )

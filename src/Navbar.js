@@ -14,7 +14,7 @@ const Navbar = props => {
             <a className="navbar-brand" href="#">EXAMPLE REACT</a>
             <button className="btn btn-light" onClick={props.handleShow}>
                 Cart 🛒
-                {/* <span className="badge badge-light">{props.cart.length}</span> */}
+                <span className="badge badge-primary">{props.cart.length}</span>
             </button>
         </nav>
     )

@@ -35,7 +35,7 @@ function App() {
       });
     };
 
-    if (options.price != 30) {
+    if (options.price !== 30) {
       filtered = filtered.filter(product => product.price < options.price);
     };
 
@@ -60,22 +60,26 @@ function App() {
     setHasBeenFiltered(false);
   };
 
-  const addToCart = item => {
+  const addToCart = (item, numberOfItems) => {
     if (size.size === null || size.id !== item) {
       alert('Please select a size for this item');
       return;
+    } else if (numberOfItems.id !== null && item !== numberOfItems.id) {
+      alert('Please select number of items for the product you would like to add');
+      return;
     } else {
       const currentCart = cart;
-      const itemToAdd = products.find(product => product.product_id == item);
+      const itemToAdd = products.find(product => product.product_id === parseInt(item));
       itemToAdd.customerSize = size.size;
+      itemToAdd.totalNumberOfItems = numberOfItems.number;
       currentCart.push(itemToAdd);
       setCart(currentCart);
-      setSize({ size: null, id: null })
+      setSize({ size: null, id: null });
     }
   };
 
   const removeFromCart = itemId => {
-    const item = cart.find(product => product.product_id == itemId);
+    const item = cart.find(product => product.product_id === parseInt(itemId));
     const updatedCart = cart.filter(cartItem => cartItem.product_id !== item.product_id);
     setCart(updatedCart);
   };
@@ -85,7 +89,7 @@ function App() {
 
   const setCurrentSize = (currentSize, id) => {
     setSize({ size: currentSize , id: id });
-  }
+  };
 
   let productsToDisplay;
   if (hasBeenFiltered === true) {
