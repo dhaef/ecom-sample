@@ -17,3 +17,8 @@
     /* border-radius: 10rem; */
     /* padding: .2rem */
 }
+
+.custom-select {
+    display: inline-block;
+    width: auto;
+}

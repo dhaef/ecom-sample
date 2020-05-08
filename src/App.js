@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import './App.css';
 
 import Navbar from './Navbar';
-import ItemContainer from './ItemContainer';
-import FilterOptions from './FilterOptions';
-import Cart from './Cart';
+import ItemContainer from './components/item/ItemContainer';
+import FilterOptions from './components/FilterOptions';
+import Cart from './components/cart/Cart';
 
 function App() {
+  // Set test products
   const [products, setProducts] = useState([
     { product_id: 1, name: 't-shirt', size: { s: 2, m:3, l:3 }, colors: ['white', 'black'], price: 10, category: 'shirt', img: 'https://images.pexels.com/photos/991509/pexels-photo-991509.jpeg?cs=srgb&dl=man-wearing-white-crew-neck-shirt-and-black-jeans-991509.jpg&fm=jpg'},
     { product_id: 2, name: 'long sleeve', size: { s: 2, m:0, l:3 }, colors: ['white', 'black'], price: 12, category: 'shirt', img: 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80' },
@@ -17,12 +18,18 @@ function App() {
     { product_id: 7, name: 'workout shorts', size: { s: 2, m:3, l:0 }, colors: ['blue', 'black'], price: 12, category: 'shorts', img: 'https://images.unsplash.com/photo-1563479145576-b86933239cba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80' },
     { product_id: 8, name: 'casual shorts', size: { s: 2, m:3, l:3 }, colors: ['tan', 'dark grey'], price: 17, category: 'shorts', img: 'https://images.pexels.com/photos/5994/man-shorts-people-trunk.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' },
   ]);
+  // Store currently filtered items
   const [currentProducts, setCurrentProducts] = useState([]);
+  // Store if products has been filtered at all
   const [hasBeenFiltered, setHasBeenFiltered] = useState(false);
+  // Store items in customers cart
   const [cart, setCart] = useState([]);
+  // Store if customer is checking their cart
   const [showCart, setShowCart] = useState(false);
+  // Store current size selected and on what item
   const [size, setSize] = useState({ size: null, id: null });
 
+  // Filter products to what the customer would like to see
   const handleFilterSubmit = (options) => {
     let filtered = products.slice();
     
@@ -55,11 +62,13 @@ function App() {
     setCurrentProducts(filtered);
   };
 
+  // Clear current filtered products
   const clearFilter = () => {
     setCurrentProducts([]);
     setHasBeenFiltered(false);
   };
 
+  // Add selected item to customers cart
   const addToCart = (item, numberOfItems) => {
     if (size.size === null || size.id !== item) {
       alert('Please select a size for this item');
@@ -68,29 +77,83 @@ function App() {
       alert('Please select number of items for the product you would like to add');
       return;
     } else {
+      let alreadyInCart = false;
       const currentCart = cart;
       const itemToAdd = products.find(product => product.product_id === parseInt(item));
-      itemToAdd.customerSize = size.size;
-      itemToAdd.totalNumberOfItems = numberOfItems.number;
+      currentCart.map(cart => {
+        if (parseInt(item) === cart.product_id) {
+          itemToAdd.customerSize = { ...cart.customerSize };
+          alreadyInCart = true;
+        }
+      });
+      if (alreadyInCart === false) {
+        itemToAdd.customerSize = { s: 0, m: 0, l: 0 };
+      }
+      let number = numberOfItems.number;
+      if (size.size === 's') {
+        if (itemToAdd.size.s < numberOfItems.number) {
+          alert(`Only added ${itemToAdd.size.s} items. Don't have ${numberOfItems.number} in stock`);
+          number = itemToAdd.size.s;
+        }
+        products.map(product => {
+          if (product.product_id === itemToAdd.product_id) {
+            product.size.s -= number;
+          }
+        });
+        itemToAdd.customerSize = { ...itemToAdd.customerSize, s: number };
+      } else if (size.size === 'm') {
+        if (itemToAdd.size.m < numberOfItems.number) {
+          alert(`Only added ${itemToAdd.size.m} items. Don't have ${numberOfItems.number} in stock`);
+          number = itemToAdd.size.m;
+        }
+        products.map(product => {
+          if (product.product_id === itemToAdd.product_id) {
+            product.size.m -= number;
+          }
+        });
+        itemToAdd.customerSize = { ...itemToAdd.customerSize, m: number };
+      } else if (size.size === 'l') {
+        if (itemToAdd.size.l < numberOfItems.number) {
+          alert(`Only added ${itemToAdd.size.l} items. Don't have ${numberOfItems.number} in stock`);
+          number = itemToAdd.size.l;
+        }
+        products.map(product => {
+          if (product.product_id === itemToAdd.product_id) {
+            product.size.l -= number;
+          }
+        });
+        itemToAdd.customerSize = { ...itemToAdd.customerSize, l: number };
+      }
+
+      if (alreadyInCart === true) {
+        setSize({ size: null, id: null });
+        return;
+      }
+      // itemToAdd.customerSize = size.size;
+      itemToAdd.totalNumberOfItems = number;
       currentCart.push(itemToAdd);
       setCart(currentCart);
       setSize({ size: null, id: null });
     }
   };
 
+  // Remove item from the cart
   const removeFromCart = itemId => {
     const item = cart.find(product => product.product_id === parseInt(itemId));
     const updatedCart = cart.filter(cartItem => cartItem.product_id !== item.product_id);
     setCart(updatedCart);
   };
 
+  // show an hide cart window
   const handleShowCart = () => setShowCart(true);
   const handleCloseCart = () => setShowCart(false);
 
+  // Set current size and which item it's set on
   const setCurrentSize = (currentSize, id) => {
     setSize({ size: currentSize , id: id });
   };
 
+  // Decide which set of products to pass and show
   let productsToDisplay;
   if (hasBeenFiltered === true) {
     productsToDisplay = currentProducts;

@@ -1,13 +1,8 @@
 import React from 'react'
 
-import Cart from './Cart'
+import Cart from './components/cart/Cart'
 
 const Navbar = props => {
-
-    // const showCart = () => {
-    //     console.log(props.cart);
-    //     return <Cart />
-    // }
 
     return (
         <nav className="navbar navbar-dark bg-dark">
