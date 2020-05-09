@@ -1,3 +1,11 @@
+## My First React App
+
+This project is a fun practice react app where I recreate an online clothing shop.
+
+Some key features include filtering products with a form, selecting size and quanitiy of items and adding the selected item to the cart, deleting from the cart, and not allowing duplicate fields in the cart/checking for item being in stock or having desired amount in stock.
+
+A few improvements could be styling the product card elements, styling the cart items, and allowing the customer to edit item in the cart.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
