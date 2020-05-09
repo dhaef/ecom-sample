@@ -70,66 +70,92 @@ function App() {
 
   // Add selected item to customers cart
   const addToCart = (item, numberOfItems) => {
+    // Check if customer selected the size 
     if (size.size === null || size.id !== item) {
       alert('Please select a size for this item');
       return;
+      // Check if customer selected the number of items
     } else if (numberOfItems.id !== null && item !== numberOfItems.id) {
       alert('Please select number of items for the product you would like to add');
       return;
     } else {
       let alreadyInCart = false;
       const currentCart = cart;
+      // Get the item to add to the cart
       const itemToAdd = products.find(product => product.product_id === parseInt(item));
+      // Check if that item is already in the cart
       currentCart.map(cart => {
         if (parseInt(item) === cart.product_id) {
           itemToAdd.customerSize = { ...cart.customerSize };
           alreadyInCart = true;
         }
       });
+      // If not in the cart initalize new selected size and quantity object
       if (alreadyInCart === false) {
         itemToAdd.customerSize = { s: 0, m: 0, l: 0 };
       }
       let number = numberOfItems.number;
+      // Check what size selected and see if;
+      // Item is in stock or
+      // Item has the desired amount in stock 
       if (size.size === 's') {
-        if (itemToAdd.size.s < numberOfItems.number) {
+        if (itemToAdd.size.s === 0) {
+          alert(`This item is out of stock`);
+          return;
+          // If in stock is less than selected amount set amount to amount in stock
+        } else if (itemToAdd.size.s < numberOfItems.number) {
           alert(`Only added ${itemToAdd.size.s} items. Don't have ${numberOfItems.number} in stock`);
           number = itemToAdd.size.s;
         }
+        // Lower the amount in stock 
         products.map(product => {
           if (product.product_id === itemToAdd.product_id) {
             product.size.s -= number;
           }
         });
+        // Set number of small items
         itemToAdd.customerSize = { ...itemToAdd.customerSize, s: number };
       } else if (size.size === 'm') {
-        if (itemToAdd.size.m < numberOfItems.number) {
+        if (itemToAdd.size.m === 0) {
+          alert(`This item is out of stock`);
+          return;
+          // If in stock is less than selected amount set amount to amount in stock
+        } else if (itemToAdd.size.m < numberOfItems.number) {
           alert(`Only added ${itemToAdd.size.m} items. Don't have ${numberOfItems.number} in stock`);
           number = itemToAdd.size.m;
         }
+        // Lower the amount in stock 
         products.map(product => {
           if (product.product_id === itemToAdd.product_id) {
             product.size.m -= number;
           }
         });
+        // Set number of medium items
         itemToAdd.customerSize = { ...itemToAdd.customerSize, m: number };
       } else if (size.size === 'l') {
-        if (itemToAdd.size.l < numberOfItems.number) {
+        if (itemToAdd.size.l === 0) {
+          alert(`This item is out of stock`);
+          return;
+          // If in stock is less than selected amount set amount to amount in stock
+        } else if (itemToAdd.size.l < numberOfItems.number) {
           alert(`Only added ${itemToAdd.size.l} items. Don't have ${numberOfItems.number} in stock`);
           number = itemToAdd.size.l;
         }
+        // Lower the amount in stock 
         products.map(product => {
           if (product.product_id === itemToAdd.product_id) {
             product.size.l -= number;
           }
         });
+        // Set number of large items
         itemToAdd.customerSize = { ...itemToAdd.customerSize, l: number };
       }
-
+      // If item is already in the cart don't add it again
       if (alreadyInCart === true) {
         setSize({ size: null, id: null });
         return;
       }
-      // itemToAdd.customerSize = size.size;
+      // Add new item to the cart
       itemToAdd.totalNumberOfItems = number;
       currentCart.push(itemToAdd);
       setCart(currentCart);
