@@ -108,11 +108,12 @@ function App() {
           number = itemToAdd.size.s;
         }
         // Lower the amount in stock 
-        products.map(product => {
+        setProducts(products.map(product => {
           if (product.product_id === itemToAdd.product_id) {
             product.size.s -= number;
           }
-        });
+          return product;
+        }));
         // Set number of small items
         itemToAdd.customerSize = { ...itemToAdd.customerSize, s: number };
       } else if (size.size === 'm') {
@@ -125,11 +126,12 @@ function App() {
           number = itemToAdd.size.m;
         }
         // Lower the amount in stock 
-        products.map(product => {
+        setProducts(products.map(product => {
           if (product.product_id === itemToAdd.product_id) {
             product.size.m -= number;
           }
-        });
+          return product;
+        }));
         // Set number of medium items
         itemToAdd.customerSize = { ...itemToAdd.customerSize, m: number };
       } else if (size.size === 'l') {
@@ -142,11 +144,12 @@ function App() {
           number = itemToAdd.size.l;
         }
         // Lower the amount in stock 
-        products.map(product => {
+        setProducts(products.map(product => {
           if (product.product_id === itemToAdd.product_id) {
             product.size.l -= number;
           }
-        });
+          return product;
+        }));
         // Set number of large items
         itemToAdd.customerSize = { ...itemToAdd.customerSize, l: number };
       }
