@@ -9,7 +9,7 @@ import Cart from './components/cart/Cart';
 function App() {
   // Set test products
   const [products, setProducts] = useState([
-    { product_id: 1, name: 't-shirt', size: { s: 2, m:3, l:3 }, colors: ['white', 'black'], price: 10, category: 'shirt', img: 'https://images.pexels.com/photos/991509/pexels-photo-991509.jpeg?cs=srgb&dl=man-wearing-white-crew-neck-shirt-and-black-jeans-991509.jpg&fm=jpg'},
+    { product_id: 1, name: 't-shirt', size: { s: 5, m:3, l:3 }, colors: ['white', 'black'], price: 10, category: 'shirt', img: 'https://images.pexels.com/photos/991509/pexels-photo-991509.jpeg?cs=srgb&dl=man-wearing-white-crew-neck-shirt-and-black-jeans-991509.jpg&fm=jpg'},
     { product_id: 2, name: 'long sleeve', size: { s: 2, m:0, l:3 }, colors: ['white', 'black'], price: 12, category: 'shirt', img: 'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80' },
     { product_id: 3, name: 'hoodie', size: { s: 0, m:3, l:3 }, colors: ['white', 'black'], price: 25, category: 'jacket', img: 'https://images.pexels.com/photos/634785/pexels-photo-634785.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260' },
     { product_id: 4, name: 'rain coat', size: { s: 2, m:3, l:3 }, colors: ['red', 'yellow'], price: 28, category: 'jacket', img: 'https://images.unsplash.com/photo-1504616267454-5460d659c9be?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80' },
@@ -94,7 +94,7 @@ function App() {
       if (alreadyInCart === false) {
         itemToAdd.customerSize = { s: 0, m: 0, l: 0 };
       }
-      let number = numberOfItems.number;
+      let number = parseInt(numberOfItems.number);
       // Check what size selected and see if;
       // Item is in stock or
       // Item has the desired amount in stock 
@@ -115,7 +115,9 @@ function App() {
           return product;
         }));
         // Set number of small items
-        itemToAdd.customerSize = { ...itemToAdd.customerSize, s: number };
+        alreadyInCart === false ? 
+          itemToAdd.customerSize = { ...itemToAdd.customerSize, s: number } : 
+          itemToAdd.customerSize = { ...itemToAdd.customerSize, s: (number += parseInt(itemToAdd.customerSize.s)) };
       } else if (size.size === 'm') {
         if (itemToAdd.size.m === 0) {
           alert(`This item is out of stock`);
@@ -133,7 +135,9 @@ function App() {
           return product;
         }));
         // Set number of medium items
-        itemToAdd.customerSize = { ...itemToAdd.customerSize, m: number };
+        alreadyInCart === false ? 
+          itemToAdd.customerSize = { ...itemToAdd.customerSize, m: number } : 
+          itemToAdd.customerSize = { ...itemToAdd.customerSize, m: (number += parseInt(itemToAdd.customerSize.m)) };
       } else if (size.size === 'l') {
         if (itemToAdd.size.l === 0) {
           alert(`This item is out of stock`);
@@ -151,7 +155,9 @@ function App() {
           return product;
         }));
         // Set number of large items
-        itemToAdd.customerSize = { ...itemToAdd.customerSize, l: number };
+        alreadyInCart === false ? 
+          itemToAdd.customerSize = { ...itemToAdd.customerSize, l: number } : 
+          itemToAdd.customerSize = { ...itemToAdd.customerSize, l: (number += parseInt(itemToAdd.customerSize.l)) };
       }
       // If item is already in the cart don't add it again
       if (alreadyInCart === true) {
@@ -169,6 +175,16 @@ function App() {
   // Remove item from the cart
   const removeFromCart = itemId => {
     const item = cart.find(product => product.product_id === parseInt(itemId));
+    setProducts(products.map(product => {
+      if (product.product_id === item.product_id) {
+        product.size = {
+          s: product.size.s += item.customerSize.s,
+          m: product.size.m += item.customerSize.m,
+          l: product.size.l += item.customerSize.l,
+        }
+      }
+      return product;
+    }));
     const updatedCart = cart.filter(cartItem => cartItem.product_id !== item.product_id);
     setCart(updatedCart);
   };
