@@ -68,6 +68,29 @@ function App() {
     setHasBeenFiltered(false);
   };
 
+  const handleSizeOfItem = (itemBeingAdded, numberOfItems, sizeOfItem, isInCart) => {
+    if (itemBeingAdded.size[sizeOfItem] === 0) {
+      alert(`This item is out of stock`);
+      return;
+    } else if (itemBeingAdded.size[sizeOfItem] < numberOfItems) {
+      alert(`Only added ${itemBeingAdded.size[sizeOfItem]} items. Don't have ${numberOfItems} in stock`);
+      numberOfItems = itemBeingAdded.size[sizeOfItem];
+    }
+
+    setProducts(products.map(product => {
+      if (product.product_id === itemBeingAdded.product_id) {
+        product.size[sizeOfItem] -= numberOfItems;
+      }
+      return product;
+    }));
+
+    isInCart ? 
+      itemBeingAdded.customerSize = { ...itemBeingAdded.customerSize, [sizeOfItem]: (numberOfItems += parseInt(itemBeingAdded.customerSize[sizeOfItem])) } :
+      itemBeingAdded.customerSize = { ...itemBeingAdded.customerSize, [sizeOfItem]: numberOfItems }
+
+    return itemBeingAdded;
+  };
+
   // Add selected item to customers cart
   const addToCart = (item, numberOfItems) => {
     // Check if customer selected the size 
@@ -82,7 +105,7 @@ function App() {
       let alreadyInCart = false;
       const currentCart = cart;
       // Get the item to add to the cart
-      const itemToAdd = products.find(product => product.product_id === parseInt(item));
+      let itemToAdd = products.find(product => product.product_id === parseInt(item));
       // Check if that item is already in the cart
       currentCart.map(cart => {
         if (parseInt(item) === cart.product_id) {
@@ -99,65 +122,11 @@ function App() {
       // Item is in stock or
       // Item has the desired amount in stock 
       if (size.size === 's') {
-        if (itemToAdd.size.s === 0) {
-          alert(`This item is out of stock`);
-          return;
-          // If in stock is less than selected amount set amount to amount in stock
-        } else if (itemToAdd.size.s < numberOfItems.number) {
-          alert(`Only added ${itemToAdd.size.s} items. Don't have ${numberOfItems.number} in stock`);
-          number = itemToAdd.size.s;
-        }
-        // Lower the amount in stock 
-        setProducts(products.map(product => {
-          if (product.product_id === itemToAdd.product_id) {
-            product.size.s -= number;
-          }
-          return product;
-        }));
-        // Set number of small items
-        alreadyInCart === false ? 
-          itemToAdd.customerSize = { ...itemToAdd.customerSize, s: number } : 
-          itemToAdd.customerSize = { ...itemToAdd.customerSize, s: (number += parseInt(itemToAdd.customerSize.s)) };
+        handleSizeOfItem(itemToAdd, parseInt(numberOfItems.number), 's', alreadyInCart);
       } else if (size.size === 'm') {
-        if (itemToAdd.size.m === 0) {
-          alert(`This item is out of stock`);
-          return;
-          // If in stock is less than selected amount set amount to amount in stock
-        } else if (itemToAdd.size.m < numberOfItems.number) {
-          alert(`Only added ${itemToAdd.size.m} items. Don't have ${numberOfItems.number} in stock`);
-          number = itemToAdd.size.m;
-        }
-        // Lower the amount in stock 
-        setProducts(products.map(product => {
-          if (product.product_id === itemToAdd.product_id) {
-            product.size.m -= number;
-          }
-          return product;
-        }));
-        // Set number of medium items
-        alreadyInCart === false ? 
-          itemToAdd.customerSize = { ...itemToAdd.customerSize, m: number } : 
-          itemToAdd.customerSize = { ...itemToAdd.customerSize, m: (number += parseInt(itemToAdd.customerSize.m)) };
+        handleSizeOfItem(itemToAdd, parseInt(numberOfItems.number), 'm', alreadyInCart);
       } else if (size.size === 'l') {
-        if (itemToAdd.size.l === 0) {
-          alert(`This item is out of stock`);
-          return;
-          // If in stock is less than selected amount set amount to amount in stock
-        } else if (itemToAdd.size.l < numberOfItems.number) {
-          alert(`Only added ${itemToAdd.size.l} items. Don't have ${numberOfItems.number} in stock`);
-          number = itemToAdd.size.l;
-        }
-        // Lower the amount in stock 
-        setProducts(products.map(product => {
-          if (product.product_id === itemToAdd.product_id) {
-            product.size.l -= number;
-          }
-          return product;
-        }));
-        // Set number of large items
-        alreadyInCart === false ? 
-          itemToAdd.customerSize = { ...itemToAdd.customerSize, l: number } : 
-          itemToAdd.customerSize = { ...itemToAdd.customerSize, l: (number += parseInt(itemToAdd.customerSize.l)) };
+        handleSizeOfItem(itemToAdd, parseInt(numberOfItems.number), 'l', alreadyInCart);
       }
       // If item is already in the cart don't add it again
       if (alreadyInCart === true) {
@@ -165,7 +134,7 @@ function App() {
         return;
       }
       // Add new item to the cart
-      itemToAdd.totalNumberOfItems = number;
+      // itemToAdd.totalNumberOfItems = number;
       currentCart.push(itemToAdd);
       setCart(currentCart);
       setSize({ size: null, id: null });

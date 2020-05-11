@@ -6,7 +6,7 @@ const Navbar = props => {
 
     return (
         <nav className="navbar navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">EXAMPLE REACT</a>
+            <a className="navbar-brand" href="#">FASHION REACT</a>
             <button className="btn btn-light" onClick={props.handleShow}>
                 Cart 🛒
                 <span className="badge badge-primary">{props.cart.length}</span>
