@@ -17,7 +17,7 @@ const FilterOptions = props => {
     const onChange = (e) => {
         setFilter({
             ...filter,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value
         })
     };
 
