@@ -9,6 +9,7 @@ export const handleFilter = (options, products) => {
             if (product.name.includes(search) || product.category.includes(search)) {
                 return product;
             }
+            return null;
         });
     };
 

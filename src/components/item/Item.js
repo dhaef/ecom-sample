@@ -1,20 +1,23 @@
 import React, { useState, useContext } from 'react'
 
-import { DispatchContext } from '../../App'
+import { DispatchContext, StateContext } from '../../App'
 
 const Item = props => {
     const dispatch = useContext(DispatchContext);
+    const state = useContext(StateContext);
+    const { size } = state;
+
     const [numberOfItems, setNumberOfItems] = useState({ number: 1, id: null });
 
     const pickSizeToColor = sizeToColor => {
-        if (props.size.id == props.product.product_id && sizeToColor == props.size.size) {
+        if (+size.id === props.product.product_id && sizeToColor === size.size) {
             return 'size';
         }
     };
 
     return (
         <div className="card">
-            <img className="card-img-top" src={props.product.img} alt="Card image cap" style={{ height: '10rem', objectFit: 'cover' }} />
+            <img className="card-img-top" src={props.product.img} alt="Card cap" style={{ height: '10rem', objectFit: 'cover' }} />
             <div className="card-body">
                 <h4 className="card-title">{props.product.name.slice(0, 1).toUpperCase()}{props.product.name.slice(1)}</h4>
                 <p>
@@ -56,7 +59,7 @@ const Item = props => {
                         props.addToCart(e.target.id, numberOfItems);
                         setNumberOfItems({ number: 1, id: null });
                     }}
-                    >Add to 🛒
+                    >Add to <span role="img" aria-label="cart">🛒</span>
                 </button>
             </div>
         </div>

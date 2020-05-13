@@ -1,32 +1,28 @@
-import React, { Component } from 'react'
+import React, { useContext } from 'react'
 
 import Item from './Item'
+import { StateContext } from '../../App'
 
-export class ItemContainer extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-                   
-        }
-    }
+const ItemContainer = (props) => {
+    const state = useContext(StateContext);
 
-    handleDisplay() {
-        if (this.props.hasBeenFiltered === false) {
-            return this.props.products.map(product => <Item key={product.product_id} product={product} addToCart={this.props.addToCart} setCurrentSize={this.props.setCurrentSize} size={this.props.size} />)
-        } else if (this.props.hasBeenFiltered === true && this.props.products.length > 0) {
-            return this.props.products.map(product => <Item key={product.product_id} product={product} addToCart={this.props.addToCart} setCurrentSize={this.props.setCurrentSize} size={this.props.size} />)
-        } else if (this.props.hasBeenFiltered === true && this.props.products.length === 0) {
+    const { hasBeenFiltered, products, currentProducts } = state
+
+    const handleDisplay = () => {
+        if (hasBeenFiltered === false) {
+            return products.map(product => <Item key={product.product_id} product={product} addToCart={props.addToCart} />)
+        } else if (hasBeenFiltered === true && currentProducts.length > 0) {
+            return currentProducts.map(product => <Item key={product.product_id} product={product} addToCart={props.addToCart}  />)
+        } else if (hasBeenFiltered === true && currentProducts.length === 0) {
             return <h5>No items found</h5>
         }
-    }
+    };
 
-    render() {
-        return (
-            <div className="card-columns">
-                { this.handleDisplay() }
-            </div>
-        )
-    }
+    return (
+        <div className="card-columns">
+            {handleDisplay()}
+        </div>
+    )
 }
 
 export default ItemContainer

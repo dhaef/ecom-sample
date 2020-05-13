@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
 
-import Cart from './components/cart/Cart'
-import { DispatchContext } from './App'
+import { DispatchContext, StateContext } from './App'
 
-const Navbar = props => {
+const Navbar = () => {
     const dispatch = useContext(DispatchContext);
+    const state = useContext(StateContext);
 
     return (
         <nav className="navbar navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">FASHION REACT</a>
+            <span className="navbar-brand" >FASHION REACT</span>
             <button className="btn btn-light" onClick={() => { dispatch({ type: 'toggleCart' }) }}>
-                Cart 🛒
-                <span className="badge badge-primary">{props.cart.length}</span>
+                Cart <span role="img" aria-label="cart">🛒</span>
+                <span className="badge badge-primary">{state.cart.length}</span>
             </button>
         </nav>
     )
