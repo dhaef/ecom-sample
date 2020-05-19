@@ -12,6 +12,8 @@ const FilterOptions = props => {
         sizeSm: false,
         sizeMd: false,
         sizeLg: false,
+        men: true,
+        women: true,
     });
 
     const onChange = (e) => {
@@ -34,6 +36,8 @@ const FilterOptions = props => {
             sizeSm: false,
             sizeMd: false,
             sizeLg: false,
+            men: true,
+            women: true,
         });
         dispatch({ type: 'clearFilter' });
     };
@@ -43,6 +47,10 @@ const FilterOptions = props => {
             <form onSubmit={handleSubmit}>
                 <div className="row">
                     <input type="text" name="search" value={filter.search} onChange={onChange} />
+                </div>
+                <div className="row">
+                    <label><input type="checkbox" name="men" style={{ marginRight: '.5rem' }} checked={filter.men} onChange={onChange} />Male</label>
+                    <label><input type="checkbox" name="women" style={{ marginRight: '.5rem', marginLeft: '.5rem' }} checked={filter.women} onChange={onChange} />Female</label>
                 </div>
                 <div className="row">
                     <span>${filter.price}</span><input type="range" min='0' max="30" value={filter.price} name="price" onChange={onChange} />

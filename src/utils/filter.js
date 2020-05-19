@@ -13,6 +13,14 @@ export const handleFilter = (options, products) => {
         });
     };
 
+    if (options.men === false) {
+        filtered = filtered.filter(product => product.fit.includes('women'));
+    }
+
+    if (options.women === false) {
+        filtered = filtered.filter(product => product.fit.includes('men'));
+    }
+
     if (options.price !== 30) {
         filtered = filtered.filter(product => product.price < options.price);
     };
