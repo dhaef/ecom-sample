@@ -2,9 +2,12 @@ import React, { useReducer, createContext } from 'react';
 import './App.css';
 
 import Navbar from './layout/Navbar';
-import Home from './layout/Home'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { products } from './products'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { products } from './products';
+import Home from './layout/Home';
+import Men from './layout/Men';
+import Women from './layout/Women';
+import Checkout from './layout/Checkout';
 
 const appReducer = (state, action) => {
   switch (action.type) {
@@ -19,18 +22,53 @@ const appReducer = (state, action) => {
         ...state,
         currentProducts: [],
         hasBeenFiltered: false,
+        filter: {
+          search: '',
+          price: 30,
+          sizeSm: false,
+          sizeMd: false,
+          sizeLg: false,
+          men: true,
+          women: true,
+        }
+      }
+    case 'setFilter':
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          [action.payload.name]: action.payload.value
+        }
       }
     case 'women':
       return {
         ...state,
         currentProducts: state.products.filter(product => product.fit.includes('women')),
         hasBeenFiltered: true,
+        filter: {
+          search: '',
+          price: 30,
+          sizeSm: false,
+          sizeMd: false,
+          sizeLg: false,
+          women: true,
+          men: false,
+        }
       }
     case 'men':
       return {
         ...state,
         currentProducts: state.products.filter(product => product.fit.includes('men')),
         hasBeenFiltered: true,
+        filter: {
+          search: '',
+          price: 30,
+          sizeSm: false,
+          sizeMd: false,
+          sizeLg: false,
+          men: true,
+          women: false
+        }
       }
     case 'toggleCart':
       return {
@@ -58,6 +96,11 @@ const appReducer = (state, action) => {
         ...state,
         products: action.payload
       }
+    case 'setCheckoutStep':
+      return {
+        ...state,
+        checkout: action.payload
+      }
     default:
       return {
         ...state
@@ -72,6 +115,16 @@ const initalState = {
   showCart: false,
   size: { size: null, id: null },
   cart: [],
+  filter: {
+    search: '',
+    price: 30,
+    sizeSm: false,
+    sizeMd: false,
+    sizeLg: false,
+    men: true,
+    women: true,
+  },
+  checkout: 1
 }
 
 export const StateContext = createContext();
@@ -87,9 +140,10 @@ function App() {
           <div className="App">
             <Navbar />
             <Switch>
-              <Route exact path='/' component={Home}></Route>
-              <Route exact path='/?category=men' component={Home} ></Route>
-              <Route exact path='/?category=women' component={Home}></Route>
+              <Route exact path={'/'} component={Home}></Route>
+              <Route exact path={'/men'} component={Men}></Route>
+              <Route exact path={'/women'} component={Women}></Route>
+              <Route exact path={'/checkout'} component={Checkout}></Route>
             </Switch>
           </div>
         </StateContext.Provider>

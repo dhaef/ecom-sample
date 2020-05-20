@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 
 import CartItem from './CartItem'
@@ -17,13 +18,15 @@ const Cart = props => {
         } else { 
             return state.cart.map(item => <CartItem key={item.product_id} product={item} />);
         }
-    }
+    };
+
+    const handleClick = () => dispatch({ type: 'toggleCart' });
     
     return (
         <>
             {/* Set modal animation to false to avoid DOMnode error */}
             <Modal show={state.showCart} animation={false}> 
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>Your Cart</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -34,9 +37,7 @@ const Cart = props => {
                     <button className="btn btn-primary" variant="secondary" onClick={() => dispatch({ type: 'toggleCart' })}>
                         Close
                     </button>
-                    <button className="btn btn-primary" variant="primary" onClick={() => alert(`Pay ${total}!`)}>
-                        Checkout
-                    </button>
+                    <Link to="/checkout" className="btn btn-primary" variant="primary" onClick={ handleClick }>Checkout</Link>
                 </Modal.Footer>
             </Modal>
         </>

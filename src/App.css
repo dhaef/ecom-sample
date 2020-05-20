@@ -22,3 +22,12 @@
     display: inline-block;
     width: auto;
 }
+
+.badge-m-right {
+    margin-right: .5rem;
+}
+
+.checkout-steps {
+    margin: 1rem 1rem 1rem 0;
+    /* padding: 1rem; */
+}

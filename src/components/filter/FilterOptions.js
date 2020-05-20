@@ -1,26 +1,16 @@
-import React, { useState, useContext } from 'react'
-import { DispatchContext, StateContext } from '../App'
-import { handleFilter } from '../utils/filter'
+import React, { useContext } from 'react'
+import { DispatchContext, StateContext } from '../../App'
+import { handleFilter } from '../../utils/filter'
 
 const FilterOptions = props => {
     const dispatch = useContext(DispatchContext);
     const state = useContext(StateContext);
 
-    const [filter, setFilter] = useState({
-        search: '',
-        price: 30,
-        sizeSm: false,
-        sizeMd: false,
-        sizeLg: false,
-        men: true,
-        women: true,
-    });
+    const { filter } = state
 
     const onChange = (e) => {
-        setFilter({
-            ...filter,
-            [e.target.name]: e.target.type === 'checkbox' ? e.target.checked : e.target.value
-        })
+        const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+        dispatch({ type: 'setFilter', payload: { name: e.target.name, value } })
     };
 
     const handleSubmit = (e) => {
@@ -30,15 +20,6 @@ const FilterOptions = props => {
     };
 
     const clear = () => {
-        setFilter({
-            search: '',
-            price: 30,
-            sizeSm: false,
-            sizeMd: false,
-            sizeLg: false,
-            men: true,
-            women: true,
-        });
         dispatch({ type: 'clearFilter' });
     };
 
@@ -46,7 +27,7 @@ const FilterOptions = props => {
         <div>
             <form onSubmit={handleSubmit}>
                 <div className="row">
-                    <input type="text" name="search" value={filter.search} onChange={onChange} />
+                    <input type="text" name="search" placeholder="Search..." value={filter.search} onChange={onChange} />
                 </div>
                 <div className="row">
                     <label><input type="checkbox" name="men" style={{ marginRight: '.5rem' }} checked={filter.men} onChange={onChange} />Male</label>

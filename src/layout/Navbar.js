@@ -12,8 +12,8 @@ const Navbar = () => {
             <Link to='/' className="navbar-brand" >FASHION REACT</Link>
             <div className="collapse navbar-collapse" id="navbarNav">
                 <div className="navbar-nav">
-                    <Link className="nav-item nav-link" to='/?category=men'>Men</Link>
-                    <Link className="nav-item nav-link" to='/?category=women'>Women</Link>
+                    <Link className="nav-item nav-link" to='/men'>Men</Link>
+                    <Link className="nav-item nav-link" to='/women'>Women</Link>
                 </div>
             </div>
             <button className="btn btn-light" onClick={() => { dispatch({ type: 'toggleCart' }) }}>

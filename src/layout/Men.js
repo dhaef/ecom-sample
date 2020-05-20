@@ -2,11 +2,11 @@ import React, { useEffect, useContext } from 'react'
 import ItemsContainer from '../components/item/ItemsContainer';
 import { DispatchContext } from '../App';
 
-const Home = (props) => {
+const Men = (props) => {
     const dispatch = useContext(DispatchContext);
 
     useEffect(() => {
-        dispatch({ type: 'clearFilter' })
+        dispatch({ type: 'men' });
     }, []);
 
     return (
@@ -16,4 +16,4 @@ const Home = (props) => {
     )
 }
 
-export default Home
+export default Men

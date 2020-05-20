@@ -1,7 +1,14 @@
-
+// import React, { useContext, useEffect } from 'react';
+// import { StateContext, DispatchContext } from '../App'
+// options, products
 export const handleFilter = (options, products) => {
+    // const state = useContext(StateContext);
+    // const dispatch = useContext(DispatchContext);
 
     let filtered = products.slice();
+    // let options = state.filter;
+
+    // console.log(options)
 
     if (options.search) {
         const search = options.search.toLowerCase();
@@ -37,5 +44,5 @@ export const handleFilter = (options, products) => {
         filtered = filtered.filter(product => product.size.l > 0);
     };
     return filtered;
-
+    // dispatch({ type: 'filtered', payload: filtered });
 }
