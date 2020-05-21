@@ -51,7 +51,9 @@ const Checkout = () => {
                         <span className="badge badge-light badge-m-right">4</span>
                         Finalize</button>
             </div>
-            { getStepToDisplay() }
+            <div>
+                { getStepToDisplay() }
+            </div>
         </div>
     )
 }

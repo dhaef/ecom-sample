@@ -18,28 +18,34 @@ const CartItem = props => {
           }
           return product;
         });
-        // console.log(updatedProducts)
-        // const updatedCart = cart.filter(cartItem => cartItem.product_id !== item.product_id);
-        // setCart(updatedCart);
         dispatch({ type: 'removeItemFromCart', payload: { item, cart: updatedProducts } })
       };
 
     return (
-        <div className="card text-center">
+      <div className="card mb-3">
+        <div className="row no-gutters">
+          <div className="col-md-4">
+            <img src={props.product.img} className="card-img" alt="Card cap" style={{ height: '10rem', objectFit: 'cover' }}></img>
+          </div>
+          <div className="col-md-6">
             <div className="card-body">
-                <p className="card-text">{ `${props.product.name.slice(0,1).toUpperCase()}${props.product.name.slice(1)}` }</p>
-                <p className="card-text">
-                    {`Size: ${props.product.customerSize.s > 0 ? `S : ${props.product.customerSize.s}` : ''}
+              <p className="card-text">{`${props.product.name.slice(0, 1).toUpperCase()}${props.product.name.slice(1)}`}</p>
+              <p className="card-text">
+                {`Size: ${props.product.customerSize.s > 0 ? `S : ${props.product.customerSize.s}` : ''}
                             ${props.product.customerSize.m > 0 ? `M : ${props.product.customerSize.m}` : ''}
                             ${props.product.customerSize.l > 0 ? `L : ${props.product.customerSize.l}` : ''}`}
-                </p>
-                <p className="card-text">{` $${props.product.price}`}</p>
-                {/* <p className="card-text">{`Quantity: ${props.product.totalNumberOfItems}`}</p> */}
-                <button className="btn btn-danger" id={props.product.product_id} onClick={e => removeFromCart(e.target.id)}>
-                    🗑
-                </button>
+              </p>
+              <p className="card-text">{` $${props.product.price}`}</p>
+              {/* <p className="card-text">{`Quantity: ${props.product.totalNumberOfItems}`}</p> */}
             </div>
+          </div>
+          <div className="col-md-2" style={{ marginTop: '1rem' }}>
+            <button className="btn btn-danger" id={props.product.product_id} onClick={e => removeFromCart(e.target.id)}>
+              🗑
+            </button>
+          </div>
         </div>
+      </div>
     )
 }
 

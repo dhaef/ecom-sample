@@ -1,5 +1,5 @@
 .card {
-    width: 18rem;
+    max-width: 35rem;
 }
 
 .out-of-stock {
@@ -30,4 +30,8 @@
 .checkout-steps {
     margin: 1rem 1rem 1rem 0;
     /* padding: 1rem; */
+}
+
+.hide {
+    display: none;
 }
