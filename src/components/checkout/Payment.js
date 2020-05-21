@@ -7,7 +7,7 @@ const Payment = () => {
 
     const totalValOfEachItemInCart = state.cart.map(item => ((item.price*item.customerSize.s)+(item.price*item.customerSize.m)+(item.price*item.customerSize.l)));
     const total = totalValOfEachItemInCart.reduce((auc, curVal) => { return auc + curVal}, 0);
-    const salesTax = Math.floor(total * .06);
+    const salesTax = Math.floor(((total * .06) * 100)) / 100;
 
     const [pay, setPay] = useState({
         cardNumber: '',
