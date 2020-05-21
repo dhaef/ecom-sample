@@ -24,7 +24,7 @@ const Checkout = () => {
     };
 
     const handleClick = e => {
-        dispatch({ type: 'setCheckoutStep', payload: +e.target.id });
+        // dispatch({ type: 'setCheckoutStep', payload: +e.target.id });
     }
 
     return (

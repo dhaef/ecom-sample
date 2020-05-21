@@ -124,7 +124,7 @@ const initalState = {
     men: true,
     women: true,
   },
-  checkout: 1
+  checkout: 1,
 }
 
 export const StateContext = createContext();

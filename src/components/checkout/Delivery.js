@@ -134,6 +134,10 @@ const Delivery = () => {
                     </div>
                 </div>
                 <button type="submit" className="btn btn-primary">Review and Pay</button>
+                <button 
+                    className="btn btn-dark" 
+                    onClick={() => dispatch({ type: 'setCheckoutStep', payload: 1 })}
+                    style={{ marginLeft: '1rem' }}>Go Back</button>
             </form>
         </div>
     )

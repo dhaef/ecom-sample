@@ -37,7 +37,9 @@ const Cart = props => {
                     <button className="btn btn-primary" variant="secondary" onClick={() => dispatch({ type: 'toggleCart' })}>
                         Close
                     </button>
-                    <Link to="/checkout" className="btn btn-primary" variant="primary" onClick={ handleClick }>Checkout</Link>
+                    { state.cart.length === 0 ? 
+                        <button className="btn btn-light" onClick={() => alert('Add items to your cart to checkout')}>Checkout</button> : 
+                        <Link to="/checkout" className="btn btn-primary" variant="primary" onClick={ handleClick }>Checkout</Link> }
                 </Modal.Footer>
             </Modal>
         </>

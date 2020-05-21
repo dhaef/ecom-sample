@@ -18,10 +18,14 @@ const Cart = () => {
                 </div>
             </div>
             <div className="col-4">
-                <button 
+                { state.cart.length === 0 ? <button 
+                    className="btn btn-light" 
+                    onClick={() => alert('Add items to your cart to proceed')}
+                    >Proceed to Delivery</button> : 
+                    <button 
                     className="btn btn-primary" 
                     onClick={() => dispatch({ type: 'setCheckoutStep', payload: 2 })}
-                    >Proceed to Delivery</button>
+                    >Proceed to Delivery</button> }
             </div>
         </div>
     )

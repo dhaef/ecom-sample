@@ -7,7 +7,7 @@ const Home = (props) => {
 
     useEffect(() => {
         dispatch({ type: 'clearFilter' })
-    }, []);
+    }, [dispatch]);
 
     return (
         <>
