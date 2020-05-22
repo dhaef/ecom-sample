@@ -8,6 +8,7 @@ import Home from './layout/Home';
 import Men from './layout/Men';
 import Women from './layout/Women';
 import Checkout from './layout/Checkout';
+import WishList from './layout/WishList';
 
 const appReducer = (state, action) => {
   switch (action.type) {
@@ -91,6 +92,16 @@ const appReducer = (state, action) => {
         cart: state.cart.filter(cartItem => cartItem.product_id !== action.payload.item.product_id),
         products: action.payload.cart
       }
+    case 'addItemToWishList': 
+      return {
+        ...state,
+        wishList: action.payload
+      }
+    case 'removeItemFromWishList':
+      return {
+        ...state,
+        wishList: state.wishList.filter(wishListItem => wishListItem.product_id !== action.payload)
+      }
     case 'updateProducts':
       return {
         ...state,
@@ -125,6 +136,7 @@ const initalState = {
     women: true,
   },
   checkout: 1,
+  wishList: [],
 }
 
 export const StateContext = createContext();
@@ -144,6 +156,7 @@ function App() {
               <Route exact path={'/men'} component={Men}></Route>
               <Route exact path={'/women'} component={Women}></Route>
               <Route exact path={'/checkout'} component={Checkout}></Route>
+              <Route exact path={'/wish-list'} component={WishList}></Route>
             </Switch>
           </div>
         </StateContext.Provider>

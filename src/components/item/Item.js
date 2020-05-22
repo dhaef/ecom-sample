@@ -15,6 +15,13 @@ const Item = props => {
         }
     };
 
+    const handleWishClick = e => {
+        let updatedWishList = state.wishList;
+        const item = state.products.find(product => product.product_id === +e.target.id);
+        updatedWishList.push(item);
+        dispatch({ type: 'addItemToWishList', payload: updatedWishList });
+    }
+
     return (
         <div className="card">
             <img className="card-img-top" src={props.product.img} alt="Card cap" style={{ height: '10rem', objectFit: 'cover' }} />
@@ -61,6 +68,13 @@ const Item = props => {
                     }}
                     >Add to <span role="img" aria-label="cart">🛒</span>
                 </button>
+                <span 
+                    role="img" 
+                    aria-label="heart" 
+                    className="badge badge-light badge-m-right"
+                    style={{ cursor: 'pointer' }}
+                    id={props.product.product_id}
+                    onClick={handleWishClick}>🖤</span>
             </div>
         </div>
     )

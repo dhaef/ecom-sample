@@ -16,6 +16,15 @@ const Navbar = () => {
                     <Link className="nav-item nav-link" to='/women'>Women</Link>
                 </div>
             </div>
+            {/* <button className="btn btn-light">Wish List  */}
+            <Link to='/wish-list'>
+                <span 
+                    role="img" 
+                    aria-label="heart" 
+                    className="badge badge-light badge-m-right"
+                    style={{ cursor: 'pointer' }}>🖤</span>
+            </Link>
+            {/* </button> */}
             <button className="btn btn-light" onClick={() => { dispatch({ type: 'toggleCart' }) }}>
                 Cart <span role="img" aria-label="cart">🛒</span>
                 <span className="badge badge-primary">{state.cart.length}</span>
