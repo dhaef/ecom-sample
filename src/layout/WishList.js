@@ -1,9 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { StateContext, DispatchContext } from '../App'
 
 const WishList = () => {
     const state = useContext(StateContext);
     const dispatch = useContext(DispatchContext);
+
+    useEffect(() => {
+        const currentWishList = JSON.parse(window.localStorage.getItem('wishList'));
+        if (currentWishList) {
+            dispatch({ type: 'setWishList', payload: currentWishList });
+        }
+    }, []);
+
+    const handleRemoveItemFromWishList = e => {
+        const updatedWishList = state.wishList.filter(wishListItem => wishListItem.product_id !== +e.target.id);
+        window.localStorage.setItem('wishList', JSON.stringify(updatedWishList));
+        dispatch({ type: 'removeItemFromWishList', payload: updatedWishList });
+    };
 
     return (
         <div className="container">
@@ -23,7 +36,7 @@ const WishList = () => {
                             </div>
                         </div>
                         <div className="col-md-2" style={{ marginTop: '1rem' }}>
-                            <button className="btn btn-danger" id={item.product_id} onClick={e => dispatch({ type: 'removeItemFromWishList', payload: +e.target.id })}>
+                            <button className="btn btn-danger" id={item.product_id} onClick={handleRemoveItemFromWishList}>
                             🗑
                             </button>
                         </div>

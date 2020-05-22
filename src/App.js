@@ -92,6 +92,11 @@ const appReducer = (state, action) => {
         cart: state.cart.filter(cartItem => cartItem.product_id !== action.payload.item.product_id),
         products: action.payload.cart
       }
+    case 'setWishList':
+      return {
+        ...state,
+        wishList: action.payload
+      }
     case 'addItemToWishList': 
       return {
         ...state,
@@ -100,7 +105,7 @@ const appReducer = (state, action) => {
     case 'removeItemFromWishList':
       return {
         ...state,
-        wishList: state.wishList.filter(wishListItem => wishListItem.product_id !== action.payload)
+        wishList: action.payload
       }
     case 'updateProducts':
       return {

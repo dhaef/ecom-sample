@@ -17,8 +17,16 @@ const Item = props => {
 
     const handleWishClick = e => {
         let updatedWishList = state.wishList;
+        for (let i = 0; i < updatedWishList.length; i++) {
+            if (updatedWishList[i].product_id === +e.target.id) {
+                alert('Item already on your wish list!');
+                return;
+            }
+            
+        }
         const item = state.products.find(product => product.product_id === +e.target.id);
         updatedWishList.push(item);
+        window.localStorage.setItem('wishList', JSON.stringify(updatedWishList));
         dispatch({ type: 'addItemToWishList', payload: updatedWishList });
     }
 
