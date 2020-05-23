@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
+import { StateContext } from '../../App';
 
-import Item from './Item'
-import { StateContext } from '../../App'
+import Item from './Item';
 
 const ItemContainer = (props) => {
     const state = useContext(StateContext);
 
-    const { hasBeenFiltered, products, currentProducts } = state
+    const { hasBeenFiltered, products, currentProducts } = state;
 
     const handleDisplay = () => {
         if (hasBeenFiltered === false) {

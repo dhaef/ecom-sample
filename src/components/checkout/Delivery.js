@@ -1,5 +1,6 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import { DispatchContext } from '../../App';
+
 import States from './States';
 
 const Delivery = () => {
@@ -35,14 +36,11 @@ const Delivery = () => {
             }
         console.log(shipping);
         dispatch({ type: 'setCheckoutStep', payload: 3 });
-    }
+    };
 
     return (
         <div>
             <h3>Shipping Info</h3>
-            {/* <div className={`alert alert-danger ${alert !== null ? 'hide' : null }`} role="alert">
-                { alert ? <p>{shipping.alert}</p> : null }
-            </div> */}
             <form onSubmit={handleSubmit}>
                 <div className="row" style={{ marginBottom: '1rem' }}>
                     <div className="col">

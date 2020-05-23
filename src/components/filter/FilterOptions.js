@@ -1,16 +1,17 @@
-import React, { useContext } from 'react'
-import { DispatchContext, StateContext } from '../../App'
-import { handleFilter } from '../../utils/filter'
+import React, { useContext } from 'react';
+import { DispatchContext, StateContext } from '../../App';
 
-const FilterOptions = props => {
+import { handleFilter } from '../../utils/filter';
+
+const FilterOptions = () => {
     const dispatch = useContext(DispatchContext);
     const state = useContext(StateContext);
 
-    const { filter } = state
+    const { filter } = state;
 
     const onChange = (e) => {
         const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-        dispatch({ type: 'setFilter', payload: { name: e.target.name, value } })
+        dispatch({ type: 'setFilter', payload: { name: e.target.name, value } });
     };
 
     const handleSubmit = (e) => {

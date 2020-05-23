@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const States = () => {
     let states = ["Alaska",
@@ -55,7 +55,7 @@ const States = () => {
                   "Washington",
                   "Wisconsin",
                   "West Virginia",
-                  "Wyoming"]
+                  "Wyoming"];
 
     return (
         <>

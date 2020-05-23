@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
+import { DispatchContext, StateContext } from '../../App';
+
 import Items from '../item/Items';
 import FilterOptions from '../filter/FilterOptions';
 import Cart from '../cart/Cart';
 import Filters from '../filter/Filters';
-import { DispatchContext, StateContext } from '../../App';
 
-const ItemsContainer = (props) => {
+const ItemsContainer = () => {
     const state = useContext(StateContext);
     const dispatch = useContext(DispatchContext);
 
@@ -26,6 +27,7 @@ const ItemsContainer = (props) => {
             }
             return product;
         });
+        
         dispatch({ type: 'updateProducts', payload: updatedProducts });
 
         isInCart ?

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
+import { DispatchContext, StateContext } from '../../App';
 
-import CartItem from './CartItem'
-import { DispatchContext, StateContext } from '../../App'
+import CartItem from './CartItem';
 
 const Cart = props => {
     const dispatch = useContext(DispatchContext);

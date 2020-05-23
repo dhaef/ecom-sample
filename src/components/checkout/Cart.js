@@ -1,6 +1,7 @@
-import React, { useContext } from 'react'
-import { StateContext, DispatchContext } from '../../App'
-import CartItem from '../cart/CartItem'
+import React, { useContext } from 'react';
+import { StateContext, DispatchContext } from '../../App';
+
+import CartItem from '../cart/CartItem';
 
 const Cart = () => {
     const state = useContext(StateContext);

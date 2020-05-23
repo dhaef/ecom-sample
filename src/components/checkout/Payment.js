@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext } from 'react';
 import { DispatchContext, StateContext } from '../../App';
 
 const Payment = () => {
@@ -28,7 +28,7 @@ const Payment = () => {
         }
         console.log(pay);
         dispatch({ type: 'setCheckoutStep', payload: 4 });
-    }
+    };
  
     return (
         <div className="container">

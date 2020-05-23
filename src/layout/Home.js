@@ -1,8 +1,8 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from 'react';
 import ItemsContainer from '../components/item/ItemsContainer';
 import { DispatchContext } from '../App';
 
-const Home = (props) => {
+const Home = () => {
     const dispatch = useContext(DispatchContext);
 
     useEffect(() => {

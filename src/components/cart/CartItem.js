@@ -1,6 +1,5 @@
-import React, { useContext } from 'react'
-
-import { DispatchContext, StateContext } from '../../App'
+import React, { useContext } from 'react';
+import { DispatchContext, StateContext } from '../../App';
 
 const CartItem = props => {
     const dispatch = useContext(DispatchContext);
@@ -18,7 +17,7 @@ const CartItem = props => {
           }
           return product;
         });
-        dispatch({ type: 'removeItemFromCart', payload: { item, cart: updatedProducts } })
+        dispatch({ type: 'removeItemFromCart', payload: { item, cart: updatedProducts } });
       };
 
     return (
@@ -36,7 +35,6 @@ const CartItem = props => {
                             ${props.product.customerSize.l > 0 ? `L : ${props.product.customerSize.l}` : ''}`}
               </p>
               <p className="card-text">{` $${props.product.price}`}</p>
-              {/* <p className="card-text">{`Quantity: ${props.product.totalNumberOfItems}`}</p> */}
             </div>
           </div>
           <div className="col-md-2" style={{ marginTop: '1rem' }}>

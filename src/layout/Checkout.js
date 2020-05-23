@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'
-import { StateContext, DispatchContext } from '../App'
-import Cart from '../components/checkout/Cart'
-import Delivery from '../components/checkout/Delivery'
-import Payment from '../components/checkout/Payment'
-import Finalize from '../components/checkout/Finalize'
+import React, { useContext } from 'react';
+import { StateContext, DispatchContext } from '../App';
+
+import Cart from '../components/checkout/Cart';
+import Delivery from '../components/checkout/Delivery';
+import Payment from '../components/checkout/Payment';
+import Finalize from '../components/checkout/Finalize';
 
 const Checkout = () => {
     const state = useContext(StateContext);
@@ -25,7 +26,7 @@ const Checkout = () => {
 
     const handleClick = e => {
         dispatch({ type: 'setCheckoutStep', payload: +e.target.id });
-    }
+    };
 
     return (
         <div className="container">

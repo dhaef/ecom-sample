@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { StateContext } from '../../App'
+import React, { useContext } from 'react';
+import { StateContext } from '../../App';
 
 const Filters = () => {
     const state = useContext(StateContext);

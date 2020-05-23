@@ -13,9 +13,6 @@
 
 .size {
     color: darkgray;
-    /* background-color: darkgray; */
-    /* border-radius: 10rem; */
-    /* padding: .2rem */
 }
 
 .custom-select {
@@ -29,7 +26,6 @@
 
 .checkout-steps {
     margin: 1rem 1rem 1rem 0;
-    /* padding: 1rem; */
 }
 
 .hide {

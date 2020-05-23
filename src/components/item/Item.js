@@ -1,6 +1,5 @@
-import React, { useState, useContext } from 'react'
-
-import { DispatchContext, StateContext } from '../../App'
+import React, { useState, useContext } from 'react';
+import { DispatchContext, StateContext } from '../../App';
 
 const Item = props => {
     const dispatch = useContext(DispatchContext);
@@ -22,13 +21,12 @@ const Item = props => {
                 alert('Item already on your wish list!');
                 return;
             }
-            
         }
         const item = state.products.find(product => product.product_id === +e.target.id);
         updatedWishList.push(item);
         window.localStorage.setItem('wishList', JSON.stringify(updatedWishList));
         dispatch({ type: 'addItemToWishList', payload: updatedWishList });
-    }
+    };
 
     return (
         <div className="card">

@@ -1,7 +1,6 @@
-import React, { useContext } from 'react'
-import {Link} from 'react-router-dom'
-
-import { DispatchContext, StateContext } from '../App'
+import React, { useContext } from 'react';
+import {Link} from 'react-router-dom';
+import { DispatchContext, StateContext } from '../App';
 
 const Navbar = () => {
     const dispatch = useContext(DispatchContext);
@@ -16,7 +15,6 @@ const Navbar = () => {
                     <Link className="nav-item nav-link" to='/women'>Women</Link>
                 </div>
             </div>
-            {/* <button className="btn btn-light">Wish List  */}
             <Link to='/wish-list'>
                 <span 
                     role="img" 
@@ -24,7 +22,6 @@ const Navbar = () => {
                     className="badge badge-light badge-m-right"
                     style={{ cursor: 'pointer' }}>🖤</span>
             </Link>
-            {/* </button> */}
             <button className="btn btn-light" onClick={() => { dispatch({ type: 'toggleCart' }) }}>
                 Cart <span role="img" aria-label="cart">🛒</span>
                 <span className="badge badge-primary">{state.cart.length}</span>
