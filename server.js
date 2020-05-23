@@ -15,5 +15,3 @@ app.listen(port, () => {
     console.log(`Listening at ${port}`);
     console.log(__dirname);
 });
-
-// "start": "react-scripts start",
