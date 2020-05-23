@@ -28,6 +28,7 @@ const Payment = () => {
         }
         console.log(pay);
         dispatch({ type: 'setCheckoutStep', payload: 4 });
+        dispatch({ type: 'orderComplete' });
     };
  
     return (
@@ -71,7 +72,7 @@ const Payment = () => {
                             {/* <label htmlFor="inputLastName">Last Name</label> */}
                             <input
                                 name="cvv"
-                                type="email"
+                                type="text"
                                 className="form-control"
                                 placeholder="CVV"
                                 value={cvv}

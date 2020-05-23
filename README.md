@@ -6,7 +6,7 @@ Some key features include filtering products with a form, selecting size and qua
 
 A few improvements could be styling the product card elements, styling the cart items, and allowing the customer to edit item in the cart.
 
-This project can be found [here](https://dhaef-react-ecom.herokuapp.com/).
+This project can be found [here](https://dhaef-react-ecom.herokuapp.com/). This will take a few seconds as it is hosted for free on heroku so the app must build.
 
 ## How to download
 

@@ -1,6 +1,11 @@
 
 export const appReducer = (state, action) => {
     switch (action.type) {
+      case 'orderComplete':
+        return {
+          ...state,
+          cart: []
+        }
       case 'filtered':
         return {
           ...state,
