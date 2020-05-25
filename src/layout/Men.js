@@ -7,7 +7,7 @@ const Men = () => {
 
     useEffect(() => {
         dispatch({ type: 'men' });
-    }, [dispatch]);
+    }, []);
 
     return (
         <>
