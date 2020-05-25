@@ -1,5 +1,6 @@
 .card {
-    max-width: 35rem;
+    min-width: 200px;
+    /* max-width: 200px; */
 }
 
 .out-of-stock {
@@ -30,4 +31,12 @@
 
 .hide {
     display: none;
+}
+
+.margin-center {
+    margin: 0 auto;
+}
+
+.notify {
+    margin: 0 auto;
 }

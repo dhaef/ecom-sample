@@ -1,23 +1,15 @@
-import React, { useState, useContext } from 'react';
-import { DispatchContext } from '../../App';
+import React, { useContext } from 'react';
+import { DispatchContext, StateContext } from '../../App';
 
 import States from './States';
 
 const Delivery = () => {
     const dispatch = useContext(DispatchContext);
-    const [shipping, setShipping] = useState({
-        firstName: '',
-        lastName: '',
-        streetAddress: '',
-        city: '',
-        zipCode: '',
-        state: '',
-        phoneNumber: '',
-        email: '',
-        alert: null,
-    });
+    const state = useContext(StateContext);
 
-    const handleChange = e => setShipping({ ...shipping, [e.target.name]: e.target.value });
+    const { shipping } = state;
+
+    const handleChange = e => dispatch({ type: 'setShipping', payload: { name: e.target.name, value: e.target.value } });
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -31,7 +23,6 @@ const Delivery = () => {
             shipping.phoneNumber === '' ||
             shipping.email === '') {
                 alert('Please fill in all fields');
-                // setShipping({ ...shipping, alert: 'Please fill in all fields' });
                 return;
             }
         console.log(shipping);

@@ -29,7 +29,7 @@ const Item = props => {
     };
 
     return (
-        <div className="card">
+        <div className="card mb-4 col-sm-6 col-md-4 col-lg-3" style={{ padding: '0' }}>
             <img className="card-img-top" src={props.product.img} alt="Card cap" style={{ height: '10rem', objectFit: 'cover' }} />
             <div className="card-body">
                 <h4 className="card-title">{props.product.name.slice(0, 1).toUpperCase()}{props.product.name.slice(1)}</h4>
@@ -80,7 +80,9 @@ const Item = props => {
                     className="badge badge-light badge-m-right"
                     style={{ cursor: 'pointer' }}
                     id={props.product.product_id}
-                    onClick={handleWishClick}>🖤</span>
+                    onClick={handleWishClick}>
+                        {state.wishList.find(item => item.product_id === props.product.product_id) ? '🖤' : '🤍'}
+                    </span>
             </div>
         </div>
     )
