@@ -9,7 +9,7 @@ import Home from './layout/Home';
 import Men from './layout/Men';
 import Women from './layout/Women';
 import Checkout from './layout/Checkout';
-import WishList from './layout/WishList';
+import WishList from 'layout/WishList';
 
 const initalState = {
   products: products,
