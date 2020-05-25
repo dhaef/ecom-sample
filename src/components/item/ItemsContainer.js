@@ -87,15 +87,15 @@ const ItemsContainer = () => {
     };
 
     return (
-        <div className="container" style={{ marginTop: '.5rem' }}>
+        <div className="container mt-2">
             <div className="row">
-                <div className="col-3 container">
+                <div className="col-12 col-md-3 container">
                     <div className="row">
                         <h1>Product Filters</h1>
                     </div>
                     <FilterOptions />
                 </div>
-                <div className="col-9">
+                <div className="col-12 col-md-9">
                     <Cart />
                     <Filters />
                     <Items

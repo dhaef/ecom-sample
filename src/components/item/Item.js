@@ -25,7 +25,7 @@ const Item = props => {
         const item = state.products.find(product => product.product_id === +e.target.id);
         updatedWishList.push(item);
         window.localStorage.setItem('wishList', JSON.stringify(updatedWishList));
-        dispatch({ type: 'addItemToWishList', payload: updatedWishList });
+        dispatch({ type: 'setWishList', payload: updatedWishList });
     };
 
     return (
@@ -35,22 +35,19 @@ const Item = props => {
                 <h4 className="card-title">{props.product.name.slice(0, 1).toUpperCase()}{props.product.name.slice(1)}</h4>
                 <p>
                     <span 
-                        className={`cursor ${props.product.size.s > 0 ? 'font-weight-normal' : 'out-of-stock'} ${pickSizeToColor('s')}`} 
-                        style={{ marginRight: '1rem' }} 
+                        className={`mr-4 cursor ${props.product.size.s > 0 ? 'font-weight-normal' : 'out-of-stock'} ${pickSizeToColor('s')}`} 
                         id={props.product.product_id}
                         onClick={e => dispatch({ type: 'setCurrentSize', payload: { size: 's', id: e.target.id } })}>
                             S
                     </span>
                     <span 
-                        className={`cursor ${props.product.size.m > 0 ? 'font-weight-normal' : 'out-of-stock'} ${pickSizeToColor('m')}`} 
-                        style={{ marginRight: '1rem' }}
+                        className={`mr-4 cursor ${props.product.size.m > 0 ? 'font-weight-normal' : 'out-of-stock'} ${pickSizeToColor('m')}`} 
                         id={props.product.product_id}
                         onClick={e => dispatch({ type: 'setCurrentSize', payload: { size: 'm', id: e.target.id } })}>
                             M
                     </span>
                     <span 
-                        className={`cursor ${props.product.size.l > 0 ? 'font-weight-normal' : 'out-of-stock'} ${pickSizeToColor('l')}`} 
-                        style={{ marginRight: '1rem' }} 
+                        className={`mr-4 cursor ${props.product.size.l > 0 ? 'font-weight-normal' : 'out-of-stock'} ${pickSizeToColor('l')}`} 
                         id={props.product.product_id}
                         onClick={e => dispatch({ type: 'setCurrentSize', payload: { size: 'l', id: e.target.id } })}>
                             L
@@ -80,7 +77,9 @@ const Item = props => {
                     className="badge badge-light badge-m-right"
                     style={{ cursor: 'pointer' }}
                     id={props.product.product_id}
-                    onClick={handleWishClick}>🖤</span>
+                    onClick={handleWishClick}>
+                        { state.wishList.find(item => item.product_id === props.product.product_id) ? '🖤' : '🤍'}
+                    </span>
             </div>
         </div>
     )

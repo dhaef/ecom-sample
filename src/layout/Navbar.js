@@ -1,10 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import { DispatchContext, StateContext } from '../App';
 
 const Navbar = () => {
     const dispatch = useContext(DispatchContext);
     const state = useContext(StateContext);
+
+    useEffect(() => {
+        const currentWishList = JSON.parse(window.localStorage.getItem('wishList'));
+        if (currentWishList) {
+            dispatch({ type: 'setWishList', payload: currentWishList });
+        }
+    }, [dispatch]);
 
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
@@ -15,12 +22,18 @@ const Navbar = () => {
                     <Link className="nav-item nav-link" to='/women'>Women</Link>
                 </div>
             </div>
-            <Link to='/wish-list'>
-                <span 
+            <Link to='/wish-list' className="nav-item nav-link">
+                <button 
                     role="img" 
                     aria-label="heart" 
-                    className="badge badge-light badge-m-right"
-                    style={{ cursor: 'pointer' }}>🖤</span>
+                    className="btn btn-light"
+                    style={{ cursor: 'pointer' }}>🖤
+                        <span 
+                        role="img" 
+                        aria-label="heart" 
+                        className="badge badge-danger"
+                        >{state.wishList.length}</span>
+                </button>
             </Link>
             <button className="btn btn-light" onClick={() => { dispatch({ type: 'toggleCart' }) }}>
                 Cart <span role="img" aria-label="cart">🛒</span>

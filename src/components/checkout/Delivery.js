@@ -42,7 +42,7 @@ const Delivery = () => {
         <div>
             <h3>Shipping Info</h3>
             <form onSubmit={handleSubmit}>
-                <div className="row" style={{ marginBottom: '1rem' }}>
+                <div className="row mb-3">
                     <div className="col">
                         {/* <label htmlFor="inputFirstName">First Name</label> */}
                         <input 
@@ -74,7 +74,7 @@ const Delivery = () => {
                         value={shipping.streetAddress}
                         onChange={handleChange}></input>
                 </div>
-                <div className="row" style={{ marginBottom: '1rem' }}>
+                <div className="row mb-3">
                     <div className="col">
                         {/* <label htmlFor="inputFirstName">City/Town</label> */}
                         <input 
@@ -109,7 +109,7 @@ const Delivery = () => {
                 </div>
                 <hr />
                 <h3>Contact Info</h3>
-                <div className="row" style={{ marginBottom: '1rem' }}>
+                <div className="row mb-3">
                     <div className="col">
                         {/* <label htmlFor="inputFirstName">First Name</label> */}
                         <input 

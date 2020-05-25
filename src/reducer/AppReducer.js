@@ -91,16 +91,6 @@ export const appReducer = (state, action) => {
           ...state,
           wishList: action.payload
         }
-      case 'addItemToWishList': 
-        return {
-          ...state,
-          wishList: action.payload
-        }
-      case 'removeItemFromWishList':
-        return {
-          ...state,
-          wishList: action.payload
-        }
       case 'updateProducts':
         return {
           ...state,

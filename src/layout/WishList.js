@@ -15,7 +15,7 @@ const WishList = () => {
     const handleRemoveItemFromWishList = e => {
         const updatedWishList = state.wishList.filter(wishListItem => wishListItem.product_id !== +e.target.id);
         window.localStorage.setItem('wishList', JSON.stringify(updatedWishList));
-        dispatch({ type: 'removeItemFromWishList', payload: updatedWishList });
+        dispatch({ type: 'setWishList', payload: updatedWishList });
     };
 
     return (

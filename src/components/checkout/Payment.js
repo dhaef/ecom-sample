@@ -26,7 +26,7 @@ const Payment = () => {
             alert('Please fill in all fields');
             return;
         }
-        console.log(pay);
+        // console.log(pay);
         dispatch({ type: 'setCheckoutStep', payload: 4 });
         dispatch({ type: 'orderComplete' });
     };
@@ -34,7 +34,7 @@ const Payment = () => {
     return (
         <div className="container">
             <div className='row'>
-                <div className="col-8">
+                <div className="col-12 col-md-8">
                     <h3>Payment Method</h3>
                     {/* Card number, name on card, month/year, cvv */}
                     <form onSubmit={handleSubmit}>
@@ -85,7 +85,7 @@ const Payment = () => {
                             style={{ marginLeft: '1rem' }}>Go Back</button>
                     </form>
                 </div>
-                <div className="col-4">
+                <div className="col-12 col-md-4">
                     <h4>Order Summary</h4>
                     <p>{state.cart.length} items for ${total}</p>
                     <p>Delievery: FREE</p>
