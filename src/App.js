@@ -5,8 +5,6 @@ import initialState from 'store/initialState';
 import { Provider } from 'store/index';
 import Navbar from 'layout/Navbar';
 import Home from 'layout/Home';
-import Men from 'layout/Men';
-import Women from 'layout/Women';
 import Checkout from 'layout/Checkout';
 import WishList from 'layout/WishList';
 import './App.css';
@@ -21,8 +19,8 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path={'/'} component={Home}></Route>
-            <Route exact path={'/men'} component={Men}></Route>
-            <Route exact path={'/women'} component={Women}></Route>
+            <Route exact path={'/men'} render={() => <Home sexFitFilter="men"/>}></Route>
+            <Route exact path={'/women'} render={() => <Home sexFitFilter="women"/>}></Route>
             <Route exact path={'/checkout'} component={Checkout}></Route>
             <Route exact path={'/wish-list'} component={WishList}></Route>
           </Switch>

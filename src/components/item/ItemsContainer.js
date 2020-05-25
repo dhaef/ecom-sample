@@ -62,13 +62,40 @@ const ItemsContainer = () => {
           dispatch({ type: 'addItemToCart', payload: currentCart });
           dispatch({ type: 'setCurrentSize', payload: { size: null, id: null } });
       }
-  };
+    };
+
+    const checkSizeOfItem = (itemBeingAdded, numberOfItems, sizeOfItem, isInCart) => {
+      if (itemBeingAdded.size[sizeOfItem] === 0) {
+          alert(`This item is out of stock`);
+          return;
+      } else if (itemBeingAdded.size[sizeOfItem] < numberOfItems) {
+          alert(`Only added ${itemBeingAdded.size[sizeOfItem]} items. Don't have ${numberOfItems} in stock`);
+          numberOfItems = itemBeingAdded.size[sizeOfItem];
+      }
+
+      const updatedProducts = products.map(product => {
+          if (product.product_id === itemBeingAdded.product_id) {
+              product.size[sizeOfItem] -= numberOfItems;
+          }
+          return product;
+      });
+      
+      dispatch({ type: 'updateProducts', payload: updatedProducts });
+
+      isInCart ?
+          itemBeingAdded.customerSize = { ...itemBeingAdded.customerSize, [sizeOfItem]: (numberOfItems += parseInt(itemBeingAdded.customerSize[sizeOfItem])) } :
+          itemBeingAdded.customerSize = { ...itemBeingAdded.customerSize, [sizeOfItem]: numberOfItems }
+
+      return itemBeingAdded;
+    };
+
 
     let itemsList = [];
     if (!hasBeenFiltered) {
       itemsList = products.map((product) => (
         <Item
           key={product.product_id}
+          addToCart={addToCart}
           product={product} />
       ));
     } else if (hasBeenFiltered && currentProducts.length) {
