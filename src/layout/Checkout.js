@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StateContext, DispatchContext } from '../App';
+import { StateContext } from '../App';
 
 import Cart from '../components/checkout/Cart';
 import Delivery from '../components/checkout/Delivery';
@@ -8,7 +8,7 @@ import Finalize from '../components/checkout/Finalize';
 
 const Checkout = () => {
     const state = useContext(StateContext);
-    const dispatch = useContext(DispatchContext);
+    // const dispatch = useContext(DispatchContext);
 
     const { checkout } = state;
 

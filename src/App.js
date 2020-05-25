@@ -29,6 +29,7 @@ const initalState = {
   },
   checkout: 1,
   wishList: [],
+  hideFilter: false,
 };
 
 export const StateContext = createContext();

@@ -31,3 +31,12 @@
 .hide {
     display: none;
 }
+
+.center-item {
+    display: block;
+    margin: 0 auto;
+}
+
+.filter-item {
+    width: 80%;
+}

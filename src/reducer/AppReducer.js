@@ -101,6 +101,16 @@ export const appReducer = (state, action) => {
           ...state,
           checkout: action.payload
         }
+      case 'hideFilter':
+        return {
+          ...state,
+          hideFilter: true,
+        }
+      case 'showFilter':
+        return {
+          ...state,
+          hideFilter: false,
+        }
       default:
         return {
           ...state

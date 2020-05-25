@@ -86,14 +86,17 @@ const ItemsContainer = () => {
         }
     };
 
+    const showFilter = () => {
+        dispatch({ type: 'showFilter' })
+    }
+
     return (
         <div className="container mt-2">
             <div className="row">
                 <div className="col-12 col-md-3 container">
-                    <div className="row">
-                        <h1>Product Filters</h1>
-                    </div>
-                    <FilterOptions />
+                    { state.hideFilter ? 
+                        <p className="text-center mb-0" onClick={showFilter}>Show Filter Options</p> : 
+                        <FilterOptions /> }
                 </div>
                 <div className="col-12 col-md-9">
                     <Cart />
