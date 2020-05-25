@@ -25,17 +25,29 @@ export const handleFilter = (options, products) => {
         filtered = filtered.filter(product => product.price < options.price);
     };
 
-    if (options.sizeSm) {
+    if (options.size === 's') {
         filtered = filtered.filter(product => product.size.s > 0);
-    };
+    }
 
-    if (options.sizeMd) {
+    if (options.size === 'm') {
         filtered = filtered.filter(product => product.size.m > 0);
     };
 
-    if (options.sizeLg) {
+    if (options.size === 'l') {
         filtered = filtered.filter(product => product.size.l > 0);
     };
+ 
+    // if (options.sizeSm) {
+    //     filtered = filtered.filter(product => product.size.s > 0);
+    // };
+
+    // if (options.sizeMd) {
+    //     filtered = filtered.filter(product => product.size.m > 0);
+    // };
+
+    // if (options.sizeLg) {
+    //     filtered = filtered.filter(product => product.size.l > 0);
+    // };
     
     return filtered;
     

@@ -21,6 +21,7 @@ const initalState = {
   filter: {
     search: '',
     price: 30,
+    size: 'd',
     sizeSm: false,
     sizeMd: false,
     sizeLg: false,
@@ -29,6 +30,23 @@ const initalState = {
   },
   checkout: 1,
   wishList: [],
+  shipping: {
+    firstName: '',
+    lastName: '',
+    streetAddress: '',
+    city: '',
+    zipCode: '',
+    state: '',
+    phoneNumber: '',
+    email: '',
+    alert: null,
+  },
+  pay: {
+    cardNumber: '',
+    name: '',
+    expire: '',
+    cvv: '',
+  }
 };
 
 export const StateContext = createContext();
@@ -41,7 +59,7 @@ function App() {
     <Router>
       <DispatchContext.Provider value={dispatch}>
         <StateContext.Provider value={state}>
-          <div className="App">
+          <div>
             <Navbar />
             <Switch>
               <Route exact path={'/'} component={Home}></Route>

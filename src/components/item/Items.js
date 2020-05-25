@@ -19,7 +19,7 @@ const ItemContainer = (props) => {
     };
 
     return (
-        <div className="card-columns">
+        <div className="card-deck">
             {handleDisplay()}
         </div>
     )

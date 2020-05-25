@@ -4,7 +4,24 @@ export const appReducer = (state, action) => {
       case 'orderComplete':
         return {
           ...state,
-          cart: []
+          cart: [],
+          shipping: {
+            firstName: '',
+            lastName: '',
+            streetAddress: '',
+            city: '',
+            zipCode: '',
+            state: '',
+            phoneNumber: '',
+            email: '',
+            alert: null,
+          },
+          pay: {
+            cardNumber: '',
+            name: '',
+            expire: '',
+            cvv: '',
+          }
         }
       case 'filtered':
         return {
@@ -20,9 +37,7 @@ export const appReducer = (state, action) => {
           filter: {
             search: '',
             price: 30,
-            sizeSm: false,
-            sizeMd: false,
-            sizeLg: false,
+            size: 'd',
             men: true,
             women: true,
           }
@@ -43,9 +58,7 @@ export const appReducer = (state, action) => {
           filter: {
             search: '',
             price: 30,
-            sizeSm: false,
-            sizeMd: false,
-            sizeLg: false,
+            size: 'd',
             women: true,
             men: false,
           }
@@ -58,9 +71,7 @@ export const appReducer = (state, action) => {
           filter: {
             search: '',
             price: 30,
-            sizeSm: false,
-            sizeMd: false,
-            sizeLg: false,
+            size: 'd',
             men: true,
             women: false
           }
@@ -110,6 +121,22 @@ export const appReducer = (state, action) => {
         return {
           ...state,
           checkout: action.payload
+        }
+      case 'setShipping':
+        return {
+          ...state,
+          shipping: {
+            ...state.shipping,
+            [action.payload.name]: action.payload.value
+          }
+        }
+      case 'setPay':
+        return {
+          ...state,
+          pay: {
+            ...state.pay,
+            [action.payload.name]: action.payload.value
+          }
         }
       default:
         return {
