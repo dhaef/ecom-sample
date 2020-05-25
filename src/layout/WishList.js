@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from 'react';
-import { StateContext, DispatchContext } from '../App';
+import React, { useEffect } from 'react';
+import { useStore } from 'store/index';
 
 const WishList = () => {
-    const state = useContext(StateContext);
-    const dispatch = useContext(DispatchContext);
+    const { state, dispatch } = useStore();
 
     useEffect(() => {
         const currentWishList = JSON.parse(window.localStorage.getItem('wishList'));

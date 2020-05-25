@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import { DispatchContext, StateContext } from '../../App';
+import { useStore } from 'store/index';
 
 const CartItem = props => {
-    const dispatch = useContext(DispatchContext);
-    const state = useContext(StateContext);
+    const { dispatch, state } = useStore();
 
     const removeFromCart = itemId => {
         const item = state.cart.find(product => product.product_id === parseInt(itemId));

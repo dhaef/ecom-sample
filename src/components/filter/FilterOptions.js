@@ -1,12 +1,9 @@
-import React, { useContext } from 'react';
-import { DispatchContext, StateContext } from '../../App';
-
-import { handleFilter } from '../../utils/filter';
+import React from 'react';
+import { useStore } from 'store/index';
+import { handleFilter } from 'utils/filter';
 
 const FilterOptions = () => {
-    const dispatch = useContext(DispatchContext);
-    const state = useContext(StateContext);
-
+    const { state, dispatch } = useStore();
     const { filter } = state;
 
     const onChange = (e) => {

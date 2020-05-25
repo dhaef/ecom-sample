@@ -1,19 +1,17 @@
 import React, { useContext } from 'react';
-import { StateContext } from '../../App';
-
+import { useStore } from 'store/index';
 import Item from './Item';
 
 const ItemContainer = (props) => {
-    const state = useContext(StateContext);
-
+    const { state, dispatch } = useStore();
     const { hasBeenFiltered, products, currentProducts } = state;
 
     const handleDisplay = () => {
-        if (hasBeenFiltered === false) {
+        if (!hasBeenFiltered) {
             return products.map(product => <Item key={product.product_id} product={product} addToCart={props.addToCart} />)
-        } else if (hasBeenFiltered === true && currentProducts.length > 0) {
+        } else if (hasBeenFiltered && currentProducts.length > 0) {
             return currentProducts.map(product => <Item key={product.product_id} product={product} addToCart={props.addToCart}  />)
-        } else if (hasBeenFiltered === true && currentProducts.length === 0) {
+        } else if (hasBeenFiltered && currentProducts.length === 0) {
             return <h5>No items found</h5>
         }
     };

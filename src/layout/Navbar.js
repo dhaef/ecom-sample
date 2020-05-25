@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
-import {Link} from 'react-router-dom';
-import { DispatchContext, StateContext } from '../App';
+import React from 'react';
+import { useStore } from 'store/index';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-    const dispatch = useContext(DispatchContext);
-    const state = useContext(StateContext);
-
+    const { state, dispatch } = useStore();
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <Link to='/' className="navbar-brand" >FASHION REACT</Link>

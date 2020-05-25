@@ -1,9 +1,8 @@
-import React, { useState, useContext } from 'react';
-import { DispatchContext, StateContext } from '../../App';
+import React, { useState } from 'react';
+import { useStore } from 'store/index';
 
 const Item = props => {
-    const dispatch = useContext(DispatchContext);
-    const state = useContext(StateContext);
+    const { dispatch, state } = useStore();
     const { size } = state;
 
     const [numberOfItems, setNumberOfItems] = useState({ number: 1, id: null });

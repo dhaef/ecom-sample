@@ -1,15 +1,12 @@
-import React, { useContext } from 'react';
-import { DispatchContext, StateContext } from '../../App';
-
-import Items from '../item/Items';
-import FilterOptions from '../filter/FilterOptions';
-import Cart from '../cart/Cart';
-import Filters from '../filter/Filters';
+import React from 'react';
+import { useStore } from 'store/index';
+import Items from 'components/item/Items';
+import FilterOptions from 'components/filter/FilterOptions';
+import Cart from 'components/cart/Cart';
+import Filters from 'components/filter/Filters';
 
 const ItemsContainer = () => {
-    const state = useContext(StateContext);
-    const dispatch = useContext(DispatchContext);
-
+    const { state, dispatch } = useStore();
     const { size, cart, products } = state;
 
     const checkSizeOfItem = (itemBeingAdded, numberOfItems, sizeOfItem, isInCart) => {

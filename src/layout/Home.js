@@ -1,13 +1,13 @@
-import React, { useEffect, useContext } from 'react';
-import ItemsContainer from '../components/item/ItemsContainer';
-import { DispatchContext } from '../App';
+import React, { useEffect } from 'react';
+import { useStore } from 'store/index';
+import ItemsContainer from 'components/item/ItemsContainer';
 
 const Home = () => {
-    const dispatch = useContext(DispatchContext);
+    const { state, dispatch } = useStore();
 
     useEffect(() => {
         dispatch({ type: 'clearFilter' })
-    }, [dispatch]);
+    }, []);
 
     return (
         <>

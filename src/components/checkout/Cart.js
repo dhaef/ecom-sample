@@ -1,12 +1,9 @@
-import React, { useContext } from 'react';
-import { StateContext, DispatchContext } from '../../App';
-
-import CartItem from '../cart/CartItem';
+import React from 'react';
+import { useStore } from 'store/index';
+import CartItem from 'components/cart/CartItem';
 
 const Cart = () => {
-    const state = useContext(StateContext);
-    const dispatch = useContext(DispatchContext);
-
+    const { dispatch, state } = useStore();
     const totalValOfEachItemInCart = state.cart.map(item => ((item.price*item.customerSize.s)+(item.price*item.customerSize.m)+(item.price*item.customerSize.l)));
     const total = totalValOfEachItemInCart.reduce((auc, curVal) => { return auc + curVal}, 0);
 

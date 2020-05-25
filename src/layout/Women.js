@@ -1,9 +1,10 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
+import { useStore } from 'store/index';
 import ItemsContainer from '../components/item/ItemsContainer';
 import { DispatchContext } from '../App';
 
 const Women = () => {
-    const dispatch = useContext(DispatchContext);
+    const { state, dispatch } = useStore();
 
     useEffect(() => {
         dispatch({ type: 'women' });
