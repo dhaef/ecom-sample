@@ -12,7 +12,7 @@ const Cart = () => {
             <div className="col-8">
                 <h4>Total [{state.cart.length} item{state.cart.length !== 1 ? 's' : null}]: ${total}</h4>
                 <div className="card-clomuns">
-                    { state.cart.map(item => <CartItem key={item.product_id} product={item} /> )}
+                    { state.cart.map(item => <CartItem key={item.id} product={item} /> )}
                 </div>
             </div>
             <div className="col-4">

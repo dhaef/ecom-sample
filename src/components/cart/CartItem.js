@@ -5,9 +5,9 @@ const CartItem = props => {
     const { dispatch, state } = useStore();
 
     const removeFromCart = itemId => {
-        const item = state.cart.find(product => product.product_id === parseInt(itemId));
+        const item = state.cart.find(product => product.id === parseInt(itemId));
         const updatedProducts = state.products.map(product => {
-          if (product.product_id === item.product_id) {
+          if (product.id === item.id) {
             product.size = {
               s: product.size.s += item.customerSize.s,
               m: product.size.m += item.customerSize.m,
@@ -37,7 +37,7 @@ const CartItem = props => {
             </div>
           </div>
           <div className="col-md-2" style={{ marginTop: '1rem' }}>
-            <button className="btn btn-danger" id={props.product.product_id} onClick={e => removeFromCart(e.target.id)}>
+            <button className="btn btn-danger" id={props.product.id} onClick={e => removeFromCart(e.target.id)}>
               🗑
             </button>
           </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { useStore } from 'store/index';
@@ -13,7 +13,7 @@ const Cart = props => {
         if (state.cart.length === 0) {
             return <p>Your Cart is empty</p>
         } else { 
-            return state.cart.map(item => <CartItem key={item.product_id} product={item} />);
+            return state.cart.map(item => <CartItem key={item.id} product={item} />);
         }
     };
 

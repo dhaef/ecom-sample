@@ -12,7 +12,7 @@ const WishList = () => {
     }, [dispatch]);
 
     const handleRemoveItemFromWishList = e => {
-        const updatedWishList = state.wishList.filter(wishListItem => wishListItem.product_id !== +e.target.id);
+        const updatedWishList = state.wishList.filter(wishListItem => wishListItem.id !== +e.target.id);
         window.localStorage.setItem('wishList', JSON.stringify(updatedWishList));
         dispatch({ type: 'removeItemFromWishList', payload: updatedWishList });
     };
@@ -22,7 +22,7 @@ const WishList = () => {
             <h2>Your Wish List</h2>
             { state.wishList.length === 0 ? 
                 <h3>Your wish list is empty</h3> : 
-                state.wishList.map(item => <div key={item.product_id}>
+                state.wishList.map(item => <div key={item.id}>
                     <div className="card mb-3">
                         <div className="row no-gutters">
                             <div className="col-md-4">
@@ -35,7 +35,7 @@ const WishList = () => {
                                 </div>
                             </div>
                             <div className="col-md-2" style={{ marginTop: '1rem' }}>
-                                <button className="btn btn-danger" id={item.product_id} onClick={handleRemoveItemFromWishList}>
+                                <button className="btn btn-danger" id={item.id} onClick={handleRemoveItemFromWishList}>
                                 🗑
                                 </button>
                             </div>
