@@ -1,27 +1,27 @@
-export default function rootReducer(state, action) {
-  switch (action.type) {
+export default function rootReducer(state, { type, payload }) {
+  switch (type) {
 
     case 'addItemToCart':
       return {
         ...state,
         products: state.products.map((product) =>
-          product.id !== action.payload.product.id
+          product.id !== payload.product.id
             ? product
             : {
                 ...product,
                 size: {
-                  ...action.payload.product.size,
-                  [action.payload.size]: action.payload.product.size[action.payload.size] - action.payload.quantity
+                  ...payload.product.size,
+                  [payload.size]: payload.product.size[payload.size] - payload.quantity
                 }
               }
         ),
         cart: [
           ...state.cart,
           {
-            ...action.payload.product,
+            ...payload.product,
             customerSize: {
-              ...action.payload.product.customerSize,
-              [action.payload.size]: action.payload.quantity
+              ...payload.product.customerSize,
+              [payload.size]: payload.quantity
             }
           }
         ]
@@ -34,7 +34,7 @@ export default function rootReducer(state, action) {
     case 'filtered': {
       const nextState = {
         ...state,
-        currentProducts: action.payload,
+        currentProducts: payload,
         hasBeenFiltered: true,
       }
       return nextState;
@@ -59,7 +59,7 @@ export default function rootReducer(state, action) {
         ...state,
         filter: {
           ...state.filter,
-          [action.payload.name]: action.payload.value
+          [payload.name]: payload.value
         }
       }
     case 'women':
@@ -100,38 +100,38 @@ export default function rootReducer(state, action) {
     case 'setCurrentSize':
       return {
         ...state,
-        size: action.payload
+        size: payload
       }
     case 'removeItemFromCart':
       return {
         ...state,
-        cart: state.cart.filter(cartItem => cartItem.id !== action.payload.item.id),
-        products: action.payload.cart
+        cart: state.cart.filter(cartItem => cartItem.id !== payload.item.id),
+        products: payload.cart
       }
     case 'setWishList':
       return {
         ...state,
-        wishList: action.payload
+        wishList: payload
       }
     case 'addItemToWishList': 
       return {
         ...state,
-        wishList: action.payload
+        wishList: payload
       }
     case 'removeItemFromWishList':
       return {
         ...state,
-        wishList: action.payload
+        wishList: payload
       }
     case 'updateProducts':
       return {
         ...state,
-        products: action.payload
+        products: payload
       }
     case 'setCheckoutStep':
       return {
         ...state,
-        checkout: action.payload
+        checkout: payload
       }
     default:
       return state;
