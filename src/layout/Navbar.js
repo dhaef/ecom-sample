@@ -15,7 +15,7 @@ const Navbar = () => {
 
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-            <Link to='/' className="navbar-brand" >FASHION REACT</Link>
+            <Link to='/' className="navbar-brand">{ window.innerWidth > 600 && 'REACT' } CLOTHING</Link>
             <div className="collapse navbar-collapse" id="navbarNav">
                 <div className="navbar-nav">
                     <Link className="nav-item nav-link" to='/men'>Men</Link>
@@ -36,7 +36,7 @@ const Navbar = () => {
                 </button>
             </Link>
             <button className="btn btn-light" onClick={() => { dispatch({ type: 'toggleCart' }) }}>
-                Cart <span role="img" aria-label="cart">🛒</span>
+                <span role="img" aria-label="cart">🛒</span>
                 <span className="badge badge-primary">{state.cart.length}</span>
             </button>
         </nav>

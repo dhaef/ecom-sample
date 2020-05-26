@@ -4,7 +4,8 @@ export const appReducer = (state, action) => {
       case 'orderComplete':
         return {
           ...state,
-          cart: []
+          cart: [],
+          checkout: 1,
         }
       case 'filtered':
         return {
@@ -32,6 +33,22 @@ export const appReducer = (state, action) => {
           ...state,
           filter: {
             ...state.filter,
+            [action.payload.name]: action.payload.value
+          }
+        }
+      case 'setPay':
+        return {
+          ...state,
+          pay: {
+            ...state.pay,
+            [action.payload.name]: action.payload.value
+          }
+        }
+      case 'setShipping':
+        return {
+          ...state,
+          shipping: {
+            ...state.shipping,
             [action.payload.name]: action.payload.value
           }
         }

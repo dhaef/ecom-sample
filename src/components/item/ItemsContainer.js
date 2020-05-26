@@ -3,7 +3,6 @@ import { DispatchContext, StateContext } from '../../App';
 
 import Items from '../item/Items';
 import FilterOptions from '../filter/FilterOptions';
-import Cart from '../cart/Cart';
 import Filters from '../filter/Filters';
 
 const ItemsContainer = () => {
@@ -99,7 +98,6 @@ const ItemsContainer = () => {
                         <FilterOptions /> }
                 </div>
                 <div className="col-12 col-md-9">
-                    <Cart />
                     <Filters />
                     <Items
                         addToCart={addToCart}

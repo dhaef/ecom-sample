@@ -9,16 +9,17 @@ const Payment = () => {
     const total = totalValOfEachItemInCart.reduce((auc, curVal) => { return auc + curVal}, 0);
     const salesTax = Math.floor(((total * .06) * 100)) / 100;
 
-    const [pay, setPay] = useState({
-        cardNumber: '',
-        name: '',
-        expire: '',
-        cvv: '',
-    });
+    // const [pay, setPay] = useState({
+    //     cardNumber: '',
+    //     name: '',
+    //     expire: '',
+    //     cvv: '',
+    // });
 
-    const { cardNumber, name, expire, cvv } = pay;
+    const { cardNumber, name, expire, cvv } = state.pay;
 
-    const handleChange = e => setPay({ ...pay, [e.target.name]: e.target.value });
+    const handleChange = e => dispatch({ type: 'setPay', payload: { name: [e.target.name], value: e.target.value } } );
+    // const handleChange = e => setPay({ ...pay, [e.target.name]: e.target.value });
  
     const handleSubmit = e => {
         e.preventDefault();
@@ -28,7 +29,6 @@ const Payment = () => {
         }
         // console.log(pay);
         dispatch({ type: 'setCheckoutStep', payload: 4 });
-        dispatch({ type: 'orderComplete' });
     };
  
     return (

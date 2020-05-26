@@ -26,7 +26,7 @@ const CartItem = props => {
           <div className="col-4 col-md-4">
             <img src={props.product.img} className="card-img" alt="Card cap" style={{ height: '10rem', objectFit: 'cover' }}></img>
           </div>
-          <div className="col-6 col-md-6">
+          <div className="col-5 col-md-6">
             <div className="card-body">
               <p className="card-text">{`${props.product.name.slice(0, 1).toUpperCase()}${props.product.name.slice(1)}`}</p>
               <p className="card-text">
@@ -37,7 +37,7 @@ const CartItem = props => {
               <p className="card-text">{` $${props.product.price}`}</p>
             </div>
           </div>
-          <div className="col-2 col-md-2" style={{ marginTop: '1rem' }}>
+          <div className="col-3 col-md-2" style={{ marginTop: '1rem' }}>
             <button className="btn btn-danger" id={props.product.product_id} onClick={e => removeFromCart(e.target.id)}>
               🗑
             </button>

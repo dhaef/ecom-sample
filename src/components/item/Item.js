@@ -74,7 +74,7 @@ const Item = props => {
                 <span 
                     role="img" 
                     aria-label="heart" 
-                    className="badge badge-light badge-m-right"
+                    className={`badge badge-light ${window.innerWidth < 600 ? "ml-2" : null}`}
                     style={{ cursor: 'pointer' }}
                     id={props.product.product_id}
                     onClick={handleWishClick}>

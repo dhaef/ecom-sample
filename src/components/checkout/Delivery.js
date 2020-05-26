@@ -1,23 +1,27 @@
 import React, { useState, useContext } from 'react';
-import { DispatchContext } from '../../App';
+import { DispatchContext, StateContext } from '../../App';
 
 import States from './States';
 
 const Delivery = () => {
     const dispatch = useContext(DispatchContext);
-    const [shipping, setShipping] = useState({
-        firstName: '',
-        lastName: '',
-        streetAddress: '',
-        city: '',
-        zipCode: '',
-        state: '',
-        phoneNumber: '',
-        email: '',
-        alert: null,
-    });
+    const state = useContext(StateContext);
+    // const [shipping, setShipping] = useState({
+    //     firstName: '',
+    //     lastName: '',
+    //     streetAddress: '',
+    //     city: '',
+    //     zipCode: '',
+    //     state: '',
+    //     phoneNumber: '',
+    //     email: '',
+    //     alert: null,
+    // });
 
-    const handleChange = e => setShipping({ ...shipping, [e.target.name]: e.target.value });
+    const { shipping } = state;
+
+    const handleChange = e => dispatch({ type: 'setShipping', payload: { name: [e.target.name], value: e.target.value } });
+    // const handleChange = e => setShipping({ ...shipping, [e.target.name]: e.target.value });
 
     const handleSubmit = e => {
         e.preventDefault();

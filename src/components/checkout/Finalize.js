@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+import {DispatchContext} from '../../App';
 
 const Finalize = () => {
+    const dispatch = useContext(DispatchContext);
+
+    useEffect(() => {
+        return () => {
+            dispatch({ type: 'orderComplete' });
+        }
+    }, [])
 
     return (
         <div>

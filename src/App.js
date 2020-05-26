@@ -10,6 +10,9 @@ import Men from './layout/Men';
 import Women from './layout/Women';
 import Checkout from './layout/Checkout';
 import WishList from './layout/WishList';
+import Cart from './components/cart/Cart';
+
+const setHideFilter = window.innerWidth > 600 ? false : true;
 
 const initalState = {
   products: products,
@@ -27,9 +30,26 @@ const initalState = {
     men: true,
     women: true,
   },
+  pay: {
+    cardNumber: '',
+    name: '',
+    expire: '',
+    cvv: '',
+  },
+  shipping: {
+    firstName: '',
+    lastName: '',
+    streetAddress: '',
+    city: '',
+    zipCode: '',
+    state: '',
+    phoneNumber: '',
+    email: '',
+    alert: null,
+  },
   checkout: 1,
   wishList: [],
-  hideFilter: false,
+  hideFilter: setHideFilter,
 };
 
 export const StateContext = createContext();
@@ -44,6 +64,7 @@ function App() {
         <StateContext.Provider value={state}>
           <div className="App">
             <Navbar />
+            <Cart />
             <Switch>
               <Route exact path={'/'} component={Home}></Route>
               <Route exact path={'/men'} component={Men}></Route>

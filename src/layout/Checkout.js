@@ -28,29 +28,35 @@ const Checkout = () => {
         // dispatch({ type: 'setCheckoutStep', payload: +e.target.id });
     };
 
+    const windowSize = window.innerWidth;
+
     return (
         <div className="container">
             <div className="checkout-steps">
                 <button id={1} 
                     onClick={ handleClick } 
                     className={`badge-m-right btn ${checkout === 1 ? 'btn-dark' : 'btn-secondary'}`}>
-                        <span className="badge badge-light badge-m-right">1</span>
-                        Cart </button>
+                        <span className={`badge badge-light ${windowSize < 600 ? null : "badge-m-right"}`}>1</span>
+                        { windowSize < 600 ? null : 'Cart'} 
+                </button>
                 <button id={2} 
                     onClick={ handleClick } 
                     className={`badge-m-right btn ${checkout === 2 ? 'btn-dark' : 'btn-secondary'}`}>
-                        <span className="badge badge-light badge-m-right">2</span>
-                        Delivery </button>
+                        <span className={`badge badge-light ${windowSize < 600 ? null : "badge-m-right"}`}>2</span>
+                        { windowSize < 600 ? null : 'Delivery'} 
+                </button>
                 <button id={3} 
                     onClick={ handleClick }
                     className={`badge-m-right btn ${checkout === 3 ? 'btn-dark' : 'btn-secondary'}`}>
-                        <span className="badge badge-light badge-m-right">3</span>
-                        Payment </button>
+                        <span className={`badge badge-light ${windowSize < 600 ? null : "badge-m-right"}`}>3</span>
+                        { windowSize < 600 ? null : 'Payment'} 
+                </button>
                 <button id={4} 
                     onClick={ handleClick }
                     className={`badge-m-right btn ${checkout === 4 ? 'btn-dark' : 'btn-secondary'}`}>
-                        <span className="badge badge-light badge-m-right">4</span>
-                        Finalize</button>
+                        <span className={`badge badge-light ${windowSize < 600 ? null : "badge-m-right"}`}>4</span>
+                        { windowSize < 600 ? null : 'Finalize'}
+                </button>
             </div>
             <div>
                 { getStepToDisplay() }
