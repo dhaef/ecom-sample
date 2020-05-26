@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useStore } from 'store/index';
+import { useStore } from 'store';
 
-const Item = ({ product }) => {
+const Product = ({ product }) => {
     const { id, img, name, price, size: inventory } = product;
     const { dispatch, state } = useStore();
     const [size, setSize] = useState();
@@ -139,4 +139,4 @@ const Item = ({ product }) => {
     )
 }
 
-export default Item
+export default Product;

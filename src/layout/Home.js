@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useStore } from 'store/index';
-import ItemsContainer from 'components/item/ItemsContainer';
+import Products from 'components/Product/Products';
 
 const Home = ({ sexFitFilter = 'clearFilter' }) => {
     const { state, dispatch } = useStore();
@@ -15,7 +15,7 @@ const Home = ({ sexFitFilter = 'clearFilter' }) => {
 
     return (
         <>
-            <ItemsContainer />
+            <Products />
         </>
     )
 }

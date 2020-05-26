@@ -1,11 +1,11 @@
 import React from 'react';
-import { useStore } from 'store/index';
+import { useStore } from 'store';
 import FilterOptions from 'components/filter/FilterOptions';
 import Cart from 'components/cart/Cart';
 import Filters from 'components/filter/Filters';
-import Item from 'components/item/Item';
+import Product from 'components/Product/index';
 
-const ItemsContainer = () => {
+const List = () => {
     const { state, dispatch } = useStore();
     const {
       cart,
@@ -14,22 +14,22 @@ const ItemsContainer = () => {
       currentProducts
     } = state;
 
-    let itemsList = [];
+    let productList = [];
     if (!hasBeenFiltered) {
-      itemsList = products.map((product) => (
-        <Item
+      productList = products.map((product) => (
+        <Product
           key={product.id}
           product={product} />
       ));
     } else if (hasBeenFiltered && currentProducts.length) {
-      itemsList = currentProducts.map((product) => (
-        <Item
+      productList = currentProducts.map((product) => (
+        <Product
           key={product.id}
           product={product}
         />
       ))
     } else if (hasBeenFiltered && !currentProducts.length) {
-      return <h5>No items found</h5>
+      return <h5>No products found</h5>
     }
 
     return (
@@ -45,7 +45,7 @@ const ItemsContainer = () => {
                     <Cart />
                     <Filters />
                     <div className="card-columns">
-                      {itemsList}
+                      {productList}
                     </div>
                 </div>
             </div>
@@ -53,4 +53,4 @@ const ItemsContainer = () => {
     )
 }
 
-export default ItemsContainer
+export default List
