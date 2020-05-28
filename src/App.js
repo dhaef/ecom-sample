@@ -1,80 +1,36 @@
-import React, { useReducer, createContext } from 'react';
+import React, { useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { appReducer } from './reducer/AppReducer';
+import rootReducer from 'reducers/index';
+import { initalState } from 'store/initalState';
+import { Provider } from 'store/index';
 
-import './App.css';
-import Navbar from './layout/Navbar';
-import { products } from './products';
-import Home from './layout/Home';
-import Men from './layout/Men';
-import Women from './layout/Women';
-import Checkout from './layout/Checkout';
-import WishList from './layout/WishList';
-import Cart from './components/cart/Cart';
+import 'App.css';
+import Navbar from 'layout/Navbar';
+import Home from 'layout/Home';
+import Checkout from 'layout/Checkout';
+import WishList from 'layout/WishList';
+import Cart from 'components/cart/Cart';
 
 const setHideFilter = window.innerWidth > 600 ? false : true;
 
-const initalState = {
-  products: products,
-  currentProducts: [],
-  hasBeenFiltered: false,
-  showCart: false,
-  size: { size: null, id: null },
-  cart: [],
-  filter: {
-    search: '',
-    price: 30,
-    sizeSm: false,
-    sizeMd: false,
-    sizeLg: false,
-    men: true,
-    women: true,
-  },
-  pay: {
-    cardNumber: '',
-    name: '',
-    expire: '',
-    cvv: '',
-  },
-  shipping: {
-    firstName: '',
-    lastName: '',
-    streetAddress: '',
-    city: '',
-    zipCode: '',
-    state: '',
-    phoneNumber: '',
-    email: '',
-    alert: null,
-  },
-  checkout: 1,
-  wishList: [],
-  hideFilter: setHideFilter,
-};
-
-export const StateContext = createContext();
-export const DispatchContext = createContext();
-
 function App() {
-  const [state, dispatch] = useReducer(appReducer, initalState);
+  const [state, dispatch] = useReducer(rootReducer, initalState);
   
   return (
     <Router>
-      <DispatchContext.Provider value={dispatch}>
-        <StateContext.Provider value={state}>
-          <div className="App">
-            <Navbar />
-            <Cart />
-            <Switch>
-              <Route exact path={'/'} component={Home}></Route>
-              <Route exact path={'/men'} component={Men}></Route>
-              <Route exact path={'/women'} component={Women}></Route>
-              <Route exact path={'/checkout'} component={Checkout}></Route>
-              <Route exact path={'/wish-list'} component={WishList}></Route>
-            </Switch>
-          </div>
-        </StateContext.Provider>
-      </DispatchContext.Provider>
+      <Provider value={{ state, dispatch }}>
+        <div>
+          <Navbar />
+          <Cart />
+          <Switch>
+            <Route exact path={'/'} component={Home}></Route>
+            <Route exact path={'/men'} render={() => { return <Home sexFitFilter="men" /> }}></Route>
+            <Route exact path={'/women'} render={() => { return <Home sexFitFilter="women" /> }}></Route>
+            <Route exact path={'/checkout'} component={Checkout}></Route>
+            <Route exact path={'/wish-list'} component={WishList}></Route>
+          </Switch>
+        </div>
+      </Provider>
     </Router>
   );
 }

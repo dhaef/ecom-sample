@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import {Link} from 'react-router-dom';
-import { DispatchContext, StateContext } from '../App';
+import { useStore } from 'store/index';
 
 const Navbar = () => {
-    const dispatch = useContext(DispatchContext);
-    const state = useContext(StateContext);
+    const {state, dispatch} = useStore();
 
     useEffect(() => {
         const currentWishList = JSON.parse(window.localStorage.getItem('wishList'));

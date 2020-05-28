@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
-import { DispatchContext, StateContext } from '../../App';
+import { useStore } from 'store/index';
 
 import CartItem from './CartItem';
 
-const Cart = props => {
-    const dispatch = useContext(DispatchContext);
-    const state = useContext(StateContext);
+const Cart = () => {
+    const {state, dispatch} = useStore();
 
     const totalValOfEachItemInCart = state.cart.map(item => ((item.price*item.customerSize.s)+(item.price*item.customerSize.m)+(item.price*item.customerSize.l)));
     const total = totalValOfEachItemInCart.reduce((auc, curVal) => { return auc + curVal}, 0);
@@ -16,7 +15,7 @@ const Cart = props => {
         if (state.cart.length === 0) {
             return <p>Your Cart is empty</p>
         } else { 
-            return state.cart.map(item => <CartItem key={item.product_id} product={item} />);
+            return state.cart.map(product => <CartItem key={product.id} product={product} />);
         }
     };
 

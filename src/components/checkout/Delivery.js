@@ -1,11 +1,10 @@
-import React, { useState, useContext } from 'react';
-import { DispatchContext, StateContext } from '../../App';
+import React, { useState } from 'react';
+import { useStore } from 'store/index';
 
 import States from './States';
 
 const Delivery = () => {
-    const dispatch = useContext(DispatchContext);
-    const state = useContext(StateContext);
+    const {state, dispatch} = useStore();
     // const [shipping, setShipping] = useState({
     //     firstName: '',
     //     lastName: '',

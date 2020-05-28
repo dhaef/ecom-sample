@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
-import { StateContext } from '../App';
+import { useStore } from 'store/index';
 
-import Cart from '../components/checkout/Cart';
-import Delivery from '../components/checkout/Delivery';
-import Payment from '../components/checkout/Payment';
-import Finalize from '../components/checkout/Finalize';
+import Cart from 'components/checkout/Cart';
+import Delivery from 'components/checkout/Delivery';
+import Payment from 'components/checkout/Payment';
+import Finalize from 'components/checkout/Finalize';
 
 const Checkout = () => {
-    const state = useContext(StateContext);
-    // const dispatch = useContext(DispatchContext);
-
+    const { state, dispatch } = useStore();
     const { checkout } = state;
 
     const getStepToDisplay = () => {

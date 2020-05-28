@@ -1,6 +1,30 @@
-
-export const appReducer = (state, action) => {
-    switch (action.type) {
+export default function rootReducer(state, { type, payload }) {
+    switch (type) {
+      case 'addItemToCart':
+        return {
+          ...state,
+          products: state.products.map(product => 
+            product.id !== payload.product.id
+              ? product
+              : {
+                ...product,
+                size: {
+                  ...payload.product.size,
+                  [payload.size]: payload.product.size[payload.size] - payload.quantity
+                }
+              }
+          ),
+          cart: [
+            ...state.cart,
+            {
+              ...payload.product,
+              customerSize: {
+                ...payload.product.customerSize,
+                [payload.size]: payload.quantity
+              }
+            }
+          ] 
+        }
       case 'orderComplete':
         return {
           ...state,
@@ -10,7 +34,7 @@ export const appReducer = (state, action) => {
       case 'filtered':
         return {
           ...state,
-          currentProducts: action.payload,
+          currentProducts: payload,
           hasBeenFiltered: true,
         }
       case 'clearFilter':
@@ -33,7 +57,7 @@ export const appReducer = (state, action) => {
           ...state,
           filter: {
             ...state.filter,
-            [action.payload.name]: action.payload.value
+            [payload.name]: payload.value
           }
         }
       case 'setPay':
@@ -41,7 +65,7 @@ export const appReducer = (state, action) => {
           ...state,
           pay: {
             ...state.pay,
-            [action.payload.name]: action.payload.value
+            [payload.name]: payload.value
           }
         }
       case 'setShipping':
@@ -49,7 +73,7 @@ export const appReducer = (state, action) => {
           ...state,
           shipping: {
             ...state.shipping,
-            [action.payload.name]: action.payload.value
+            [payload.name]: payload.value
           }
         }
       case 'women':
@@ -90,33 +114,38 @@ export const appReducer = (state, action) => {
       case 'setCurrentSize':
         return {
           ...state,
-          size: action.payload
-        }
-      case 'addItemToCart':
-        return {
-          ...state,
-          cart: action.payload
+          size: payload
         }
       case 'removeItemFromCart':
+        console.log(payload);
         return {
           ...state,
-          cart: state.cart.filter(cartItem => cartItem.product_id !== action.payload.item.product_id),
-          products: action.payload.cart
+          cart: state.cart.filter(cartItem => cartItem.id !== payload.id),
+          products: state.products.map(product => product.id !== payload.id 
+            ? product 
+            : {
+              ...product,
+              size: {
+                s: product.size.s += payload.customerSize.s,
+                m: product.size.m += payload.customerSize.m,
+                l: product.size.l += payload.customerSize.l,
+              }
+            })
         }
       case 'setWishList':
         return {
           ...state,
-          wishList: action.payload
+          wishList: payload
         }
       case 'updateProducts':
         return {
           ...state,
-          products: action.payload
+          products: payload
         }
       case 'setCheckoutStep':
         return {
           ...state,
-          checkout: action.payload
+          checkout: payload
         }
       case 'hideFilter':
         return {

@@ -1,17 +1,21 @@
-import React, { useEffect, useContext } from 'react';
-import ItemsContainer from '../components/item/ItemsContainer';
-import { DispatchContext } from '../App';
+import React, { useEffect } from 'react';
+import { useStore } from 'store/index';
+import Products from 'components/product/Products';
 
-const Home = () => {
-    const dispatch = useContext(DispatchContext);
+const Home = ({ sexFitFilter = 'clearFilter' }) => {
+    const { state, dispatch } = useStore();
 
     useEffect(() => {
-        dispatch({ type: 'clearFilter' })
-    }, [dispatch]);
+      dispatch({ type: sexFitFilter });
+    }, [sexFitFilter]);
+
+    useEffect(() => {
+        dispatch({ type: 'clearFilter' });
+    }, []);
 
     return (
         <>
-            <ItemsContainer />
+            <Products />
         </>
     )
 }

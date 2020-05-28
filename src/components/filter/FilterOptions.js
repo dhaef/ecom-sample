@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from 'react';
-import { DispatchContext, StateContext } from '../../App';
+import React, { useEffect } from 'react';
+import { useStore } from 'store/index';
 
 import { handleFilter } from '../../utils/filter';
 
 const FilterOptions = () => {
-    const dispatch = useContext(DispatchContext);
-    const state = useContext(StateContext);
+    const {state, dispatch} = useStore();
 
     const { filter } = state;
 
@@ -58,7 +57,7 @@ const FilterOptions = () => {
                     <label><input type="checkbox" name="women" className="mr-2 ml-2" checked={filter.women} onChange={onChange} />Female</label>
                 </div>
                 <div className="row center-item" style={{ width: 'fit-content' }}>
-                    <p className="text-center">${filter.price}</p>
+                    <p className="text-center mb-0">${filter.price}</p>
                     <input type="range" min='0' max="30" value={filter.price} name="price" onChange={onChange} />
                 </div>
                 <div className="row">

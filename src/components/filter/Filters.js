@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { StateContext } from '../../App';
+import React from 'react';
+import { useStore } from 'store/index';
 
 const Filters = () => {
-    const state = useContext(StateContext);
+    const {state, dispatch} = useStore();
 
     const { filter } = state;
 

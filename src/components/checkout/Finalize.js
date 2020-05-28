@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react';
-import {DispatchContext} from '../../App';
+import { useStore } from 'store/index';
 
 const Finalize = () => {
-    const dispatch = useContext(DispatchContext);
+    const {dispatch} = useStore();
 
     useEffect(() => {
         return () => {
