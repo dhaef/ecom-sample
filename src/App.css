@@ -4,8 +4,69 @@
 
 .card-title {
     text-transform: capitalize;
-  }
-  
+}
+
+.navbar-dark {
+    background-color: black !important;
+}
+
+footer {
+    width: 100%;
+    /* height: 20vh; */
+    background-color: black;
+    color: white;
+}
+
+.footer-pad {
+    padding: 3rem 0;
+}
+
+footer input {
+    width: 60%;
+    margin: auto 0;
+    padding: 0.375rem 0.75rem;
+    background-color: black;
+    color: white;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+footer button {
+    width: 35%;
+}
+
+footer a {
+    color: white;
+}
+
+footer a:hover {
+    color: lightgrey;
+}
+
+footer button {
+    background-color: black !important;
+    border: 1px solid white !important;
+    font-weight: bold !important;
+}
+
+footer button:hover {
+    background-color: white !important;
+    color: black !important;
+}
+
+.social-container {
+    display: flex;
+}
+
+.social-container h3 {
+    margin: auto;
+}
+
+.size-option {
+    font-weight: bolder !important;
+    font-size: larger;
+}
+
 .invalid {
     color: red;
 }
@@ -21,15 +82,16 @@
 
 .size {
     color: darkgray;
+    text-decoration: underline;
 }
 
 .custom-select {
     display: inline-block;
-    width: auto;
+    width: fit-content !important;
 }
 
 .badge-m-right {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
 
 .checkout-steps {
@@ -47,4 +109,75 @@
 
 .filter-item {
     width: 80%;
+}
+
+.qty-input {
+    width: fit-content;
+    margin: 0 auto 16px auto;
+}
+
+.top {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.alert-msg {
+    font-size: small;
+}
+
+.pricing label {
+    margin-bottom: 0;
+    display: inline-block;
+    padding-right: 10px;
+    white-space: nowrap;
+}
+
+.pricing input {
+    vertical-align: middle;
+}
+
+.pricing label span {
+    vertical-align: middle;
+}
+
+.filter-form {
+    font-size: large;
+}
+
+.filter-form input {
+    border: none;
+    border-bottom: 1px solid black;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.jumbotron {
+    background-image: url("sweater-banner.jpeg");
+    background-size: cover;
+    color: white;
+}
+
+.jumbotron h3 {
+    background-color: black;
+    width: fit-content;
+    padding: 1rem;
+    margin: auto;
+}
+
+.quantity-item {
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.quantity-value {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+@media only screen and (min-width: 768px) {
+    nav {
+        padding-right: 5rem !important;
+        padding-left: 5rem !important;
+    }
 }

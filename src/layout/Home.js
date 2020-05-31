@@ -1,21 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useStore } from 'store/index';
-import Products from 'components/product/Products';
+import Product from 'components/product/index';
+import Banner from 'components/style/Banner';
 
-const Home = ({ sexFitFilter = 'clearFilter' }) => {
+const Home = () => {
     const { state, dispatch } = useStore();
-
-    useEffect(() => {
-      dispatch({ type: sexFitFilter });
-    }, [sexFitFilter]);
-
-    useEffect(() => {
-        dispatch({ type: 'clearFilter' });
-    }, []);
+    const { products } = state;
+    const spotlight = [products[0], products[4], products[6]];
 
     return (
         <>
-            <Products />
+            <Banner />
+            <h2 className="text-center">Featured Products</h2>
+            <div className="container card-columns">
+                {spotlight.map(product => <Product key={product.id} product={product} />)}
+            </div>
         </>
     )
 }

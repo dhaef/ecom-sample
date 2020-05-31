@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useStore } from 'store/index';
 
 const Navbar = () => {
-    const {state, dispatch} = useStore();
+    const { state, dispatch } = useStore();
+    const [showMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
         const currentWishList = JSON.parse(window.localStorage.getItem('wishList'));
@@ -13,31 +14,38 @@ const Navbar = () => {
     }, [dispatch]);
 
     return (
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-            <Link to='/' className="navbar-brand">{ window.innerWidth > 600 && 'REACT' } CLOTHING</Link>
-            <div className="collapse navbar-collapse" id="navbarNav">
+        <nav className="navbar navbar-expand-md navbar-dark ">
+            <Link to='/' className="navbar-brand">DOSS</Link>
+            <button
+                className="navbar-toggler"
+                type="button"
+                onClick={() => setShowMenu(!showMenu)}>
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className={`navbar-collapse ${showMenu ? "" : "collapse"}`} id="navbarNav">
                 <div className="navbar-nav">
                     <Link className="nav-item nav-link" to='/men'>Men</Link>
                     <Link className="nav-item nav-link" to='/women'>Women</Link>
                 </div>
-            </div>
-            <Link to='/wish-list' className="nav-item nav-link">
-                <button 
-                    role="img" 
-                    aria-label="heart" 
-                    className="btn btn-light"
-                    style={{ cursor: 'pointer' }}>🖤
-                        <span 
-                        role="img" 
-                        aria-label="heart" 
-                        className="badge badge-danger"
+                <div className="ml-auto">
+                    <button
+                        role="img"
+                        aria-label="heart"
+                        className="btn btn-light mr-2"
+                        onClick={() => { dispatch({ type: 'showWishList', payload: true }) }}
+                        style={{ cursor: 'pointer' }}>🖤
+                            <span
+                            role="img"
+                            aria-label="heart"
+                            className="badge badge-danger"
                         >{state.wishList.length}</span>
-                </button>
-            </Link>
-            <button className="btn btn-light" onClick={() => { dispatch({ type: 'toggleCart' }) }}>
-                <span role="img" aria-label="cart">🛒</span>
-                <span className="badge badge-primary">{state.cart.length}</span>
-            </button>
+                    </button>
+                    <button className="btn btn-light" onClick={() => { dispatch({ type: 'toggleCart' }) }}>
+                        <span role="img" aria-label="cart">🛒</span>
+                        <span className="badge badge-primary">{state.cart.length}</span>
+                    </button>
+                </div>
+            </div>
         </nav>
     )
 }

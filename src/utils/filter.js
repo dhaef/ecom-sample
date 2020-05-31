@@ -1,6 +1,6 @@
 
 export const handleFilter = (options, products) => {
-    
+
     let filtered = products.slice();
 
     if (options.search) {
@@ -13,18 +13,19 @@ export const handleFilter = (options, products) => {
         });
     };
 
-    if (options.men === false) {
+    if (!options.men) {
         filtered = filtered.filter(product => product.fit.includes('women'));
     };
 
-    if (options.women === false) {
+    if (!options.women) {
         filtered = filtered.filter(product => product.fit.includes('men'));
     };
 
     if (options.price !== 30) {
         filtered = filtered.filter(product => product.price < options.price);
+        console.log('30')
     };
-    
+
     if (options.size === 's') {
         filtered = filtered.filter(product => product.size.s > 0);
     };
@@ -32,7 +33,7 @@ export const handleFilter = (options, products) => {
     if (options.size === 'm') {
         filtered = filtered.filter(product => product.size.m > 0);
     };
-    
+
     if (options.size === 'l') {
         filtered = filtered.filter(product => product.size.l > 0);
     };
@@ -48,7 +49,7 @@ export const handleFilter = (options, products) => {
     // if (options.sizeLg) {
     //     filtered = filtered.filter(product => product.size.l > 0);
     // };
-    
+
     return filtered;
-    
+
 }

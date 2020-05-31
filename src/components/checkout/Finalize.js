@@ -1,8 +1,8 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { useStore } from 'store/index';
 
 const Finalize = () => {
-    const {dispatch} = useStore();
+    const { state, dispatch } = useStore();
 
     useEffect(() => {
         return () => {
@@ -12,8 +12,8 @@ const Finalize = () => {
 
     return (
         <div>
-            <h2>Thank you for you order!</h2>
-            <p>Check your email for confirmation</p>
+            <h2>Thank you for you order {state.shipping.firstName}!</h2>
+            <p>Confirmation sent to {state.shipping.email}</p>
         </div>
     )
 }

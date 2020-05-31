@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useStore } from 'store/index';
+import { Modal } from 'react-bootstrap';
 
 const WishList = () => {
-    const {state, dispatch} = useStore();
+    const { state, dispatch } = useStore();
 
     useEffect(() => {
         const currentWishList = JSON.parse(window.localStorage.getItem('wishList'));
@@ -18,31 +19,42 @@ const WishList = () => {
     };
 
     return (
-        <div className="container">
-            <h2>Your Wish List</h2>
-            { state.wishList.length === 0 ? 
-                <h3>Your wish list is empty</h3> : 
-                state.wishList.map(item => <div key={item.id}>
-                    <div className="card mb-3">
-                        <div className="row no-gutters">
-                            <div className="col-4 col-md-4">
-                                <img src={item.img} className="card-img" alt="Card cap" style={{ height: '10rem', objectFit: 'cover' }}></img>
-                            </div>
-                            <div className="col-5 col-md-6">
-                                <div className="card-body">
-                                    <p className="card-text">{`${item.name.slice(0, 1).toUpperCase()}${item.name.slice(1)}`}</p>
-                                    <p className="card-text">{` $${item.price}`}</p>
+        <Modal show={state.showWishList} animation={false}>
+            <Modal.Header>
+                <Modal.Title>
+                    Your Wish List
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {state.wishList.length === 0 ?
+                    <h3 className="text-center">Your wish list is empty</h3> :
+                    state.wishList.map(item => <div key={item.id}>
+                        <div className="card mb-3">
+                            <div className="row no-gutters">
+                                <div className="col-4 col-md-4">
+                                    <img src={item.img} className="card-img" alt="Card cap" style={{ height: '10rem', objectFit: 'cover' }}></img>
+                                </div>
+                                <div className="col-5 col-md-6">
+                                    <div className="card-body">
+                                        <p className="card-text" style={{ textTransform: 'capitalize' }}>{item.name}</p>
+                                        <p className="card-text">{` $${item.price}`}</p>
+                                    </div>
+                                </div>
+                                <div className="col-3 col-md-2" style={{ marginTop: '1rem' }}>
+                                    <button className="btn btn-danger" id={item.id} onClick={handleRemoveItemFromWishList}>
+                                        🗑
+                                </button>
                                 </div>
                             </div>
-                            <div className="col-3 col-md-2" style={{ marginTop: '1rem' }}>
-                                <button className="btn btn-danger" id={item.id} onClick={handleRemoveItemFromWishList}>
-                                🗑
-                                </button>
-                            </div>
                         </div>
-                    </div>
-                </div>) }
-        </div>
+                    </div>)}
+            </Modal.Body>
+            <Modal.Footer>
+                <button className="btn btn-primary" variant="secondary" onClick={() => dispatch({ type: 'showWishList', payload: false })}>
+                    Close
+                </button>
+            </Modal.Footer>
+        </Modal>
     )
 }
 
