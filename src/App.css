@@ -29,6 +29,7 @@ footer input {
     color: white;
     border: none;
     border-bottom: 1px solid white;
+    text-align: center;
 }
 
 footer button {
@@ -62,7 +63,7 @@ footer button:hover {
     margin: auto;
 }
 
-.size-option {
+.text-heavy {
     font-weight: bolder !important;
     font-size: larger;
 }
@@ -82,7 +83,8 @@ footer button:hover {
 
 .size {
     color: darkgray;
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    border-bottom: 3px solid darkgray;
 }
 
 .custom-select {
@@ -105,10 +107,6 @@ footer button:hover {
 .center-item {
     display: block;
     margin: 0 auto;
-}
-
-.filter-item {
-    width: 80%;
 }
 
 .qty-input {
@@ -143,13 +141,40 @@ footer button:hover {
 
 .filter-form {
     font-size: large;
+    padding-right: 15px;
 }
 
-.filter-form input {
+.filter-input {
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid black;
     text-align: center;
-    border-radius: 10px;
+    /* border-radius: 10px; */
+}
+
+.filter-input:focus {
+    outline: 0;
+}
+
+form select {
+    appearance: none;
+    border-radius: 0;
+    padding: 0.3rem;
+}
+
+form select:focus {
+    outline: none;
+}
+
+.price-input {
+    border: none;
+    width: 40%;
+    padding-top: 0.25rem;
+    padding-bottom: 0rem;
+}
+
+.price span {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 }
 
 .jumbotron {
@@ -166,13 +191,23 @@ footer button:hover {
 }
 
 .quantity-item {
-    border: 2px solid black;
+    border: 3px solid black;
     cursor: pointer;
 }
 
 .quantity-value {
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+}
+
+.product-link {
+    color: black;
+}
+
+.product-link:hover {
+    color: black;
+    text-decoration: none;
+    border-bottom: 3px solid black;
 }
 
 @media only screen and (min-width: 768px) {

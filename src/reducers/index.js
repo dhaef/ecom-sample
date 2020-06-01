@@ -53,12 +53,9 @@ export default function rootReducer(state, { type, payload }) {
         hasBeenFiltered: false,
         filter: {
           search: '',
-          price: 30,
-          sizeSm: false,
-          sizeMd: false,
-          sizeLg: false,
-          men: true,
-          women: true,
+          price: null,
+          size: '',
+          sex: '',
         }
       }
     case 'setFilter':
@@ -92,12 +89,9 @@ export default function rootReducer(state, { type, payload }) {
         hasBeenFiltered: true,
         filter: {
           search: '',
-          price: 30,
-          sizeSm: false,
-          sizeMd: false,
-          sizeLg: false,
-          women: true,
-          men: false,
+          price: null,
+          size: '',
+          sex: 'women',
         }
       }
     case 'men':
@@ -107,12 +101,9 @@ export default function rootReducer(state, { type, payload }) {
         hasBeenFiltered: true,
         filter: {
           search: '',
-          price: 30,
-          sizeSm: false,
-          sizeMd: false,
-          sizeLg: false,
-          men: true,
-          women: false
+          price: null,
+          size: '',
+          sex: 'men',
         }
       }
     case 'toggleCart':

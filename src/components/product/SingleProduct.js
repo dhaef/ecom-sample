@@ -64,15 +64,15 @@ const SingleProduct = props => {
                     <h1 className="text-center card-title">{product.name}</h1>
                     <p className="text-center">${product.price}</p>
                     <div className="text-center">
-                        <p>SIZE: {size === 's' ? 'Small' : size === 'm' ? 'Medium' : size === 'l' ? 'Large' : 'Select Size'}</p>
+                        <p className="text-heavy">SIZE: {size === 's' ? 'Small' : size === 'm' ? 'Medium' : size === 'l' ? 'Large' : 'Select Size'}</p>
                         <span
-                            className={`mr-2 cursor size-option ${size === 's' ? 'size' : ''}`}
+                            className={`mr-2 cursor text-heavy ${size === 's' ? 'size' : ''}`}
                             onClick={() => { setSize('s') }}>S</span>
                         <span
-                            className={`mr-2 cursor size-option ${size === 'm' ? 'size' : ''}`}
+                            className={`mr-2 cursor text-heavy ${size === 'm' ? 'size' : ''}`}
                             onClick={() => { setSize('m') }}>M</span>
                         <span
-                            className={`cursor size-option ${size === 'l' ? 'size' : ''}`}
+                            className={`cursor text-heavy ${size === 'l' ? 'size' : ''}`}
                             onClick={() => { setSize('l') }}>L</span>
                     </div>
                     <div className="ml-auto mr-auto mt-3" style={{ width: 'fit-content' }}>
@@ -86,7 +86,7 @@ const SingleProduct = props => {
                     </div>
                     <div style={{ width: 'fit-content' }} className="ml-auto mr-auto">
                         <button
-                            className="btn btn-dark mt-4"
+                            className="btn btn-dark mt-4 text-heavy"
                             style={{ width: 'fit-content' }}
                             onClick={handleAddToCartClick}>
                             Add to {' '}
@@ -99,7 +99,7 @@ const SingleProduct = props => {
                         <span
                             role="img"
                             aria-label="heart"
-                            className="btn btn-dark mt-4 ml-2"
+                            className="btn btn-dark mt-4 ml-2 text-heavy"
                             style={{ cursor: 'pointer' }}
                             id={id}
                             onClick={handleWishClick}

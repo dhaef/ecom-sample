@@ -3,7 +3,7 @@ import React from 'react'
 const Banner = () => {
     return (
         <div className="jumbotron">
-            <h3>Fall 2020 SoonTM</h3>
+            <h3 className="text-heavy">FALL 2020 soonTM</h3>
         </div>
     )
 }

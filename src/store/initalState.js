@@ -16,12 +16,9 @@ export const initalState = {
   cart: [],
   filter: {
     search: '',
-    price: 30,
-    sizeSm: false,
-    sizeMd: false,
-    sizeLg: false,
-    men: true,
-    women: true,
+    price: null,
+    size: '',
+    sex: '',
   },
   pay: {
     cardNumber: '',

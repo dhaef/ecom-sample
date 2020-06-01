@@ -52,8 +52,8 @@ const Product = ({ product }) => {
       <img className="card-img-top" src={img} alt="Card cap" style={{ height: '10rem', objectFit: 'cover' }} />
       <div
         className="card-body">
-        <h4 className="card-title text-center">
-          <Link to={`/product/${id}`} style={{ color: 'black' }}>
+        <h4 className="card-title text-center text-heavy">
+          <Link to={`/product/${id}`} className="product-link">
             {name}
           </Link>
         </h4>
@@ -65,9 +65,9 @@ const Product = ({ product }) => {
         >
           <span
             className={`
-                        cursor size-option
+                        cursor text-heavy
                         ${size === 's' ? 'size' : ''}
-                        ${inventory.s > 0 ? 'font-weight-normal' : 'out-of-stock'}
+                        ${inventory.s > 0 ? '' : 'out-of-stock'}
                       `}
             style={{ marginRight: '1rem' }}
             id={id}
@@ -77,9 +77,9 @@ const Product = ({ product }) => {
                     </span>
           <span
             className={`
-                          cursor size-option
+                          cursor text-heavy
                           ${size === 'm' ? 'size' : ''}
-                          ${inventory.m > 0 ? 'font-weight-normal' : 'out-of-stock'}
+                          ${inventory.m > 0 ? '' : 'out-of-stock'}
                         `}
             style={{ marginRight: '1rem' }}
             id={id}
@@ -89,9 +89,9 @@ const Product = ({ product }) => {
                     </span>
           <span
             className={`
-                          cursor size-option
+                          cursor text-heavy
                           ${size === 'l' ? 'size' : ''}
-                          ${inventory.l > 0 ? 'font-weight-normal' : 'out-of-stock'}
+                          ${inventory.l > 0 ? '' : 'out-of-stock'}
                         `}
             id={id}
             onClick={() => setSize('l')}
@@ -107,7 +107,16 @@ const Product = ({ product }) => {
                     ${formErrors.quantity ? 'invalid' : ''}
                   `}
         >
-          <span>Qty: </span>
+          <div className="ml-auto mr-auto mt-3" style={{ width: 'fit-content' }}>
+            <span
+              className="quantity-item p-2"
+              onClick={() => setQuantity(quantity - 1)}>-</span>
+            <span className="quantity-value p-2 pl-3 pr-3">{quantity}</span>
+            <span
+              className="quantity-item p-2"
+              onClick={() => setQuantity(quantity + 1)}>+</span>
+          </div>
+          {/* <span>Qty: </span>
           <select
             value={quantity}
             className="custom-select"
@@ -122,16 +131,16 @@ const Product = ({ product }) => {
             <option value="5">5</option>
             <option value="6">6</option>
             <option value="7">7</option>
-          </select>
+          </select> */}
         </div>
-        <p className="card-text text-center">Price: ${price}</p>
+        <p className="card-text text-center text-heavy">Price: ${price}</p>
         {formErrors.insufficientStock && (
           <h6 className="card-text alert-msg text-center">
             Insufficient stock
           </h6>
         )}
         <button
-          className="btn btn-dark"
+          className="btn btn-dark text-heavy"
           style={{ width: '100%' }}
           onClick={handleAddToCartClick}>
           Add to {' '}

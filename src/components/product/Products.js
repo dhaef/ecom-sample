@@ -46,17 +46,17 @@ const List = ({ sexFitFilter = 'clearFilter' }) => {
     return (
         <div className="container mt-2">
             <div className="row">
-                <div className="col-12 col-md-3 container">
-                    {state.hideFilter ?
-                        <p
-                            className="text-center mb-0"
-                            onClick={showFilter}>
-                            Show Filter Options
+                {state.hideFilter ?
+                    <p
+                        className="text-center mb-0"
+                        onClick={showFilter}>
+                        Show Filter Options
                         </p> :
-                        <FilterOptions />}
-                </div>
-                <div className="col-12 col-md-9">
-                    <Filters />
+                    <FilterOptions />}
+            </div>
+            <div className="row">
+                <div className="col-12 col-md-12">
+                    {/* <Filters /> */}
                     <div className="card-columns">
                         {productList}
                     </div>
