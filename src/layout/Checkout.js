@@ -29,7 +29,7 @@ const Checkout = () => {
     const windowSize = window.innerWidth;
 
     return (
-        <div className="container">
+        <div className="container checkout">
             <div className="checkout-steps">
                 <button id={1}
                     onClick={handleClick}

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useStore } from 'store';
 import FilterOptions from 'components/filter/FilterOptions';
-import Filters from 'components/filter/Filters';
 import Product from 'components/product/index';
 
-const List = ({ sexFitFilter = 'clearFilter' }) => {
+const List = (props) => {
+    // { sexFitFilter = 'clearFilter' }
     const { state, dispatch } = useStore();
     const {
         products,
@@ -13,12 +13,12 @@ const List = ({ sexFitFilter = 'clearFilter' }) => {
     } = state;
 
     useEffect(() => {
-        dispatch({ type: sexFitFilter });
-    }, [sexFitFilter]);
+        dispatch({ type: props.sexFitFilter });
+    }, [props.sexFitFilter]);
 
-    useEffect(() => {
-        dispatch({ type: 'clearFilter' });
-    }, []);
+    // useEffect(() => {
+    //     dispatch({ type: 'clearFilter' });
+    // }, []);
 
     let productList = [];
     if (!hasBeenFiltered) {
@@ -55,7 +55,7 @@ const List = ({ sexFitFilter = 'clearFilter' }) => {
                     <FilterOptions />}
             </div>
             <div className="row">
-                <div className="col-12 col-md-12">
+                <div className="col-12 col-md-12 products-container">
                     {/* <Filters /> */}
                     <div className="card-columns">
                         {productList}

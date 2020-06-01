@@ -46,18 +46,6 @@ export default function rootReducer(state, { type, payload }) {
         currentProducts: payload,
         hasBeenFiltered: true,
       }
-    case 'clearFilter':
-      return {
-        ...state,
-        currentProducts: [],
-        hasBeenFiltered: false,
-        filter: {
-          search: '',
-          price: null,
-          size: '',
-          sex: '',
-        }
-      }
     case 'setFilter':
       return {
         ...state,
@@ -145,11 +133,6 @@ export default function rootReducer(state, { type, payload }) {
       return {
         ...state,
         checkout: payload
-      }
-    case 'hideFilter':
-      return {
-        ...state,
-        hideFilter: true,
       }
     case 'showFilter':
       return {
