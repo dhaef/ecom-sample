@@ -17,13 +17,20 @@ const Payment = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (!cardNumber || !name || !expire || !cvv) {
-            alert('Please fill in all fields');
-            return;
-        } else if (cvv.length < 3 || cvv.length > 4) {
+        const errors = {
+            cardNumberError: !cardNumber,
+            nameError: !name,
+            expireError: !expire,
+            cvvError: !cvv,
+        };
 
+        const hasErrors = Object.values(errors).reduce((result, val) => val ? true : result, false);
+
+        setFormErrors(errors);
+
+        if (!hasErrors) {
+            dispatch({ type: 'setCheckoutStep', payload: 4 });
         }
-        dispatch({ type: 'setCheckoutStep', payload: 4 });
     };
 
     return (
@@ -35,16 +42,18 @@ const Payment = () => {
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             {/* <label htmlFor="inputFirstName">First Name</label> */}
+                            {formErrors.cardNumberError ? <span className="invalid">Add a card #</span> : null}
                             <input
                                 name="cardNumber"
                                 type="text"
-                                className="form-control"
+                                className={`form-control ${formErrors.cardNumberError ? 'invalid' : ''}`}
                                 placeholder="Card Number"
                                 value={cardNumber}
                                 onChange={handleChange}></input>
                         </div>
                         <div className="form-group">
                             {/* <label htmlFor="inputLastName">Last Name</label> */}
+                            {formErrors.nameError ? <span className="invalid">Add name on card</span> : null}
                             <input
                                 name="name"
                                 type="text"
@@ -55,16 +64,18 @@ const Payment = () => {
                         </div>
                         <div className="form-group">
                             {/* <label htmlFor="inputFirstName">First Name</label> */}
+                            {formErrors.expireError ? <span className="invalid">Add expiration date</span> : null}
                             <input
                                 name="expire"
                                 type="text"
                                 className="form-control"
-                                placeholder="Expiration date"
+                                placeholder="Expiration date (MM/YY)"
                                 value={expire}
                                 onChange={handleChange}></input>
                         </div>
                         <div className="form-group">
                             {/* <label htmlFor="inputLastName">Last Name</label> */}
+                            {formErrors.cvvError ? <span className="invalid">Add CVV</span> : null}
                             <input
                                 name="cvv"
                                 type="text"

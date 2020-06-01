@@ -8,7 +8,7 @@ const Finalize = () => {
         return () => {
             dispatch({ type: 'orderComplete' });
         }
-    }, [])
+    })
 
     return (
         <div>

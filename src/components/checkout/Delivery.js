@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useStore } from 'store/index';
 
 import States from './States';
@@ -6,6 +6,16 @@ import OrderSummary from './OrderSummary';
 
 const Delivery = () => {
     const { state, dispatch } = useStore();
+    const [formErrors, setFormErrors] = useState({
+        firstNameError: false,
+        lastNameError: false,
+        streetAddressError: false,
+        cityError: false,
+        zipCodeError: false,
+        stateError: false,
+        phoneNumberError: false,
+        emailError: false,
+    });
 
     const { shipping } = state;
 
@@ -14,25 +24,30 @@ const Delivery = () => {
     const handleSubmit = e => {
         e.preventDefault();
 
-        if (shipping.firstName === '' ||
-            shipping.lastName === '' ||
-            shipping.streetAddress === '' ||
-            shipping.city === '' ||
-            shipping.zipCode === '' ||
-            shipping.state === '' ||
-            shipping.phoneNumber === '' ||
-            shipping.email === '') {
-            alert('Please fill in all fields');
-            return;
+        const errors = {
+            firstNameError: !shipping.firstName,
+            lastNameError: !shipping.lastName,
+            streetAddressError: !shipping.streetAddress,
+            cityError: !shipping.city,
+            zipCodeError: !shipping.zipCode,
+            stateError: !shipping.state,
+            phoneNumberError: !shipping.phoneNumber,
+            emailError: !shipping.email,
+        };
+
+        const hasErrors = Object.values(errors).reduce((results, val) => val ? true : results, false);
+
+        setFormErrors(errors);
+
+        if (!hasErrors) {
+            dispatch({ type: 'setCheckoutStep', payload: 3 });
         }
-        console.log(shipping);
-        dispatch({ type: 'setCheckoutStep', payload: 3 });
     };
 
     return (
         <div>
             <div className="row">
-                <h3>Shipping Info</h3>
+                <h3 className="pl-3">Shipping Info</h3>
             </div>
             <div className="row mb-3">
                 <div className="col-12 col-md-8">
@@ -40,6 +55,7 @@ const Delivery = () => {
                         <div className="row mb-3">
                             <div className="col">
                                 {/* <label htmlFor="inputFirstName">First Name</label> */}
+                                {formErrors.firstNameError ? <span className="invalid">Add a first name</span> : null}
                                 <input
                                     name="firstName"
                                     type="text"
@@ -50,6 +66,7 @@ const Delivery = () => {
                             </div>
                             <div className="col">
                                 {/* <label htmlFor="inputLastName">Last Name</label> */}
+                                {formErrors.lastNameError ? <span className="invalid">Add a last name</span> : null}
                                 <input
                                     name="lastName"
                                     type="text"
@@ -61,6 +78,7 @@ const Delivery = () => {
                         </div>
                         <div className="form-group">
                             {/* <label htmlFor="inputStreetAddress">Street Address</label> */}
+                            {formErrors.streetAddressError ? <span className="invalid">Add a street address</span> : null}
                             <input
                                 name="streetAddress"
                                 type="text"
@@ -72,6 +90,7 @@ const Delivery = () => {
                         <div className="row mb-3">
                             <div className="col">
                                 {/* <label htmlFor="inputFirstName">City/Town</label> */}
+                                {formErrors.cityError ? <span className="invalid">Add a city</span> : null}
                                 <input
                                     name="city"
                                     type="text"
@@ -82,6 +101,7 @@ const Delivery = () => {
                             </div>
                             <div className="col">
                                 {/* <label htmlFor="inputLastName">Zip Code</label> */}
+                                {formErrors.zipCodeError ? <span className="invalid">Add a zip</span> : null}
                                 <input
                                     name="zipCode"
                                     type="text"
@@ -93,6 +113,7 @@ const Delivery = () => {
                         </div>
                         <div className="form-group">
                             {/* <label htmlFor="inputStreetAddress">State</label> */}
+                            {formErrors.stateError ? <span className="invalid">Pick a state</span> : null}
                             <select
                                 name="state"
                                 className="form-control"
@@ -107,6 +128,7 @@ const Delivery = () => {
                         <div className="row mb-3">
                             <div className="col">
                                 {/* <label htmlFor="inputFirstName">First Name</label> */}
+                                {formErrors.phoneNumberError ? <span className="invalid">Add a phone #</span> : null}
                                 <input
                                     name="phoneNumber"
                                     type="text"
@@ -117,6 +139,7 @@ const Delivery = () => {
                             </div>
                             <div className="col">
                                 {/* <label htmlFor="inputLastName">Last Name</label> */}
+                                {formErrors.emailError ? <span className="invalid">Add an email</span> : null}
                                 <input
                                     name="email"
                                     type="email"

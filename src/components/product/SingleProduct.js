@@ -14,12 +14,13 @@ const SingleProduct = props => {
         insufficientStock: false
     });
 
-    const { id, img, name, price, size: inventory } = product;
+    const { id, size: inventory } = product;
 
     useEffect(() => {
         setProduct(
             state.products.find(product => product.id === +props.match.params.id)
-        )
+        );
+        // eslint-disable-next-line
     }, [props.match.params.id]);
 
     const handleAddToCartClick = () => {
@@ -58,9 +59,12 @@ const SingleProduct = props => {
             <div className="row">
                 <div className="col-md-2"></div>
                 <div className="col-12 col-md-5">
-                    <img src={product.img} className="center-item" style={{ height: '75vh', width: '30vw', objectFit: 'cover' }} />
+                    <img
+                        src={product.img}
+                        className="center-item single-img"
+                        alt="Card cap" />
                 </div>
-                <div className="col-12 col-md-3">
+                <div className="col-12 col-md-5">
                     <h1 className="text-center card-title">{product.name}</h1>
                     <p className="text-center">${product.price}</p>
                     <div className="text-center">
@@ -108,7 +112,7 @@ const SingleProduct = props => {
                         </span>
                     </div>
                 </div>
-                <div className="col-md-2"></div>
+                {/* <div className="col-md-2"></div> */}
             </div>
         </div>
     )

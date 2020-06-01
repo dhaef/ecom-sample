@@ -39,6 +39,23 @@ export default function rootReducer(state, { type, payload }) {
         ...state,
         cart: [],
         checkout: 1,
+        pay: {
+          cardNumber: '',
+          name: '',
+          expire: '',
+          cvv: '',
+        },
+        shipping: {
+          firstName: '',
+          lastName: '',
+          streetAddress: '',
+          city: '',
+          zipCode: '',
+          state: '',
+          phoneNumber: '',
+          email: '',
+          alert: null,
+        },
       }
     case 'filtered':
       return {
@@ -77,7 +94,7 @@ export default function rootReducer(state, { type, payload }) {
         hasBeenFiltered: true,
         filter: {
           search: '',
-          price: null,
+          price: '',
           size: '',
           sex: 'women',
         }
@@ -89,7 +106,7 @@ export default function rootReducer(state, { type, payload }) {
         hasBeenFiltered: true,
         filter: {
           search: '',
-          price: null,
+          price: '',
           size: '',
           sex: 'men',
         }

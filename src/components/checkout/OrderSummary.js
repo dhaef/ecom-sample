@@ -9,7 +9,7 @@ const OrderSummary = () => {
     const salesTax = Math.floor((total * .06) * 100) / 100;
 
     return (
-        <div className="order-summary p-3 mb-2">
+        <div className="order-summary p-3 mb-2 mt-2">
             <h4 className="text-center">Order Summary</h4>
             {/* <p>{state.cart.length} items for <span className="float-right">${total}</span></p> */}
             <p>Delievery: <span className="float-right">FREE</span></p>

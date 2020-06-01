@@ -216,13 +216,23 @@ form select:focus {
 }
 
 .order-summary {
-    width: 60%;
+    width: 100%;
     border: 3px solid black;
+}
+
+.single-img {
+    object-fit: cover;
+    height: 75vh;
+    width: 80vw;
 }
 
 @media only screen and (min-width: 768px) {
     nav {
         padding-right: 5rem !important;
         padding-left: 5rem !important;
+    }
+
+    .single-img {
+        width: 30vw;
     }
 }

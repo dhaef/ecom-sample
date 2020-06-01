@@ -16,7 +16,7 @@ export const initalState = {
   cart: [],
   filter: {
     search: '',
-    price: null,
+    price: '',
     size: '',
     sex: '',
   },

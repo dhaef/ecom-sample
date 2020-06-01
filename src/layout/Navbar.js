@@ -14,7 +14,7 @@ const Navbar = () => {
     }, [dispatch]);
 
     return (
-        <nav className="navbar navbar-expand-md navbar-dark ">
+        <nav className="navbar sticky-top navbar-expand-md navbar-dark ">
             <Link to='/' className="navbar-brand">DOSS</Link>
             <button
                 className="navbar-toggler"
@@ -33,8 +33,12 @@ const Navbar = () => {
                         aria-label="heart"
                         className="btn btn-light mr-2"
                         onClick={() => { dispatch({ type: 'showWishList', payload: true }) }}
-                        style={{ cursor: 'pointer' }}>🖤
-                            <span
+                        style={{ cursor: 'pointer' }}>
+                        <span
+                            role="img"
+                            aria-label="heart"
+                        >🖤</span>
+                        <span
                             role="img"
                             aria-label="heart"
                             className="badge badge-danger"

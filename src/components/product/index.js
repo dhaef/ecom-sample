@@ -116,22 +116,6 @@ const Product = ({ product }) => {
               className="quantity-item p-2"
               onClick={() => setQuantity(quantity + 1)}>+</span>
           </div>
-          {/* <span>Qty: </span>
-          <select
-            value={quantity}
-            className="custom-select"
-            id={id}
-            onChange={({ target: { value } }) => setQuantity(Number(value))}
-          >
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-          </select> */}
         </div>
         <p className="card-text text-center text-heavy">Price: ${price}</p>
         {formErrors.insufficientStock && (

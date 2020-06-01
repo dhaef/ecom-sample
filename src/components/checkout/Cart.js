@@ -22,7 +22,7 @@ const Cart = () => {
                     onClick={() => alert('Add items to your cart to proceed')}
                 >Proceed to Delivery</button> :
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-primary mb-2"
                         onClick={() => dispatch({ type: 'setCheckoutStep', payload: 2 })}
                     >Proceed to Delivery</button>}
             </div>

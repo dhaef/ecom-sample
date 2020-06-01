@@ -11,6 +11,7 @@ const FilterOptions = () => {
     useEffect(() => {
         const results = handleFilter(filter, state.products);
         dispatch({ type: 'filtered', payload: results });
+        // eslint-disable-next-line
     }, [filter]);
 
     const onChange = (e) => {

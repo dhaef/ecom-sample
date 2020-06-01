@@ -4,7 +4,7 @@ import Product from 'components/product/index';
 import Banner from 'components/style/Banner';
 
 const Home = () => {
-    const { state, dispatch } = useStore();
+    const { state } = useStore();
     const { products } = state;
     const spotlight = [products[0], products[4], products[6]];
 

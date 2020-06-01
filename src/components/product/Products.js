@@ -14,6 +14,7 @@ const List = (props) => {
 
     useEffect(() => {
         dispatch({ type: props.sexFitFilter });
+        // eslint-disable-next-line
     }, [props.sexFitFilter]);
 
     // useEffect(() => {
