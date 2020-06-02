@@ -3,6 +3,7 @@ export default function rootReducer(state, { type, payload }) {
     case 'addItemToCart':
       return {
         ...state,
+        showCart: true,
         products: state.products.map(product =>
           product.id !== payload.product.id
             ? product
@@ -160,6 +161,22 @@ export default function rootReducer(state, { type, payload }) {
       return {
         ...state,
         showWishList: payload
+      }
+    case 'showAlert':
+      return {
+        ...state,
+        alert: {
+          show: true,
+          msgs: payload
+        }
+      }
+    case 'closeAlert':
+      return {
+        ...state,
+        alert: {
+          show: false,
+          msgs: []
+        }
       }
     default:
       return {

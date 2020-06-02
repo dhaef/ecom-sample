@@ -13,6 +13,7 @@ import Cart from 'components/cart/Cart';
 import Footer from 'layout/Footer';
 import Products from 'components/product/Products';
 import SingleProduct from 'components/product/SingleProduct';
+import Alert from 'components/alert/Alert';
 
 // const setHideFilter = window.innerWidth > 600 ? false : true;
 
@@ -26,6 +27,7 @@ function App() {
           <Navbar />
           <Cart />
           <WishList />
+          <Alert />
           <Switch>
             <Route exact path={'/'} component={Home}></Route>
             <Route exact path={'/men'} render={() => { return <Products sexFitFilter="men" /> }}></Route>

@@ -39,6 +39,9 @@ footer input {
 
 footer button {
     width: 35%;
+    background-color: black !important;
+    border: 1px solid white !important;
+    font-weight: bold !important;
 }
 
 footer a {
@@ -47,12 +50,6 @@ footer a {
 
 footer a:hover {
     color: lightgrey;
-}
-
-footer button {
-    background-color: black !important;
-    border: 1px solid white !important;
-    font-weight: bold !important;
 }
 
 footer button:hover {
@@ -66,6 +63,14 @@ footer button:hover {
 
 .social-container h3 {
     margin: auto;
+}
+
+.social-icon {
+    font-size: xx-large;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 1rem 1rem 0 1rem;
+    cursor: pointer;
 }
 
 .text-heavy {
@@ -183,7 +188,7 @@ form select:focus {
 }
 
 .jumbotron {
-    background-image: url("sweater-banner.jpeg");
+    background-image: url("pictures/sweater-banner.jpeg");
     background-size: cover;
     color: white;
 }
@@ -234,5 +239,9 @@ form select:focus {
 
     .single-img {
         width: 30vw;
+    }
+
+    .social-icon {
+        padding: 0 1rem;
     }
 }

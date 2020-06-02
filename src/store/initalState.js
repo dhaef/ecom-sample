@@ -40,4 +40,8 @@ export const initalState = {
   checkout: 1,
   wishList: [],
   showWishList: false,
+  alert: {
+    show: false,
+    msgs: []
+  }
 };

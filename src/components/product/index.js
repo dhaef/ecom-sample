@@ -9,30 +9,43 @@ const Product = ({ product }) => {
   const [size, setSize] = useState();
   const [quantity, setQuantity] = useState(1);
   const [formErrors, setFormErrors] = useState({
-    currentlyInWishlist: false,
-    size: false,
-    quantity: false,
-    outOfStock: false,
-    insufficientStock: false
+    currentlyInWishlist: { hasError: false, msg: "Item already in wish list" },
+    size: { hasError: false, msg: "Select a size" },
+    quantity: { hasError: false, msg: "Select a quantity" },
+    outOfStock: { hasError: false, msg: "Item out of stock" },
+    insufficientStock: { hasError: false, msg: "Insufficient Stock" }
   });
 
   const handleAddToCartClick = () => {
     const errors = {
-      quantity: quantity < 1,
-      size: !size,
-      outOfStock: inventory[size] < 1,
-      insufficientStock: inventory[size] < quantity,
+      size: { hasError: !size, msg: "Select a size" },
+      quantity: { hasError: quantity < 1, msg: "Select a quantity" },
+      outOfStock: { hasError: inventory[size] < 1, msg: "Item out of stock" },
+      insufficientStock: { hasError: inventory[size] < quantity, msg: "Insufficient Stock" }
     };
-
-    const hasError = Object.values(errors).reduce((result, val) => val ? true : result, false);
+    const errorMsgs = [];
+    // const hasError = Object.values(errors).reduce((result, val) => val.hasError ? true : result, false);
+    const hasErrors = Object.values(errors).reduce((result, val) => {
+      if (val.hasError) {
+        errorMsgs.push(val.msg);
+        return true;
+      } else {
+        return result;
+      }
+    }, false);
 
     setFormErrors(errors);
 
-    if (!hasError) {
+    if (!hasErrors) {
       dispatch({
         type: 'addItemToCart',
         payload: { size, quantity, product, currentlyInCart: !!state.cart.find(product => product.id === id) }
       });
+    } else {
+      dispatch({
+        type: 'showAlert',
+        payload: errorMsgs
+      })
     }
   };
 
@@ -57,10 +70,10 @@ const Product = ({ product }) => {
             {name}
           </Link>
         </h4>
-        {formErrors.size ? <h6 className="card-text alert-msg text-center">Please select your size</h6> : ''}
+        {formErrors.size.hasError ? <h6 className="card-text alert-msg text-center">Please select your size</h6> : ''}
         <p
           className={`text-center
-                    ${formErrors.size ? 'invalid' : ''}
+                    ${formErrors.size.hasError ? 'invalid' : ''}
                   `}
         >
           <span
@@ -99,12 +112,12 @@ const Product = ({ product }) => {
             L
                     </span>
         </p>
-        {formErrors.quantity ? <h6 className="card-text alert-msg text-center">Please select a Qty</h6> : ''}
+        {formErrors.quantity.hasError ? <h6 className="card-text alert-msg text-center">Please select a Qty</h6> : ''}
         <div
           className={`
                     card-text
                     qty-input
-                    ${formErrors.quantity ? 'invalid' : ''}
+                    ${formErrors.quantity.hasError ? 'invalid' : ''}
                   `}
         >
           <div className="ml-auto mr-auto mt-3" style={{ width: 'fit-content' }}>
@@ -118,7 +131,7 @@ const Product = ({ product }) => {
           </div>
         </div>
         <p className="card-text text-center text-heavy">Price: ${price}</p>
-        {formErrors.insufficientStock && (
+        {formErrors.insufficientStock.hasError && (
           <h6 className="card-text alert-msg text-center">
             Insufficient stock
           </h6>
@@ -144,7 +157,7 @@ const Product = ({ product }) => {
         >
           {state.wishList.find(item => item.id === id) ? '❤️' : '🤍'}
         </span>
-        {formErrors.currentlyInWishlist && <span className="card-text">Product on wish list</span>}
+        {/* {formErrors.currentlyInWishlist.hasError && <span className="card-text">Product on wish list</span>} */}
       </div>
     </div>
   )

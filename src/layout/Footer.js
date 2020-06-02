@@ -11,7 +11,10 @@ const Footer = () => {
                         <button className="btn btn-dark ml-2">SIGN UP</button>
                     </div>
                     <div className="col-12 col-md-6 social-container">
-                        <h3>Social icons</h3>
+                        {/* <h3>Social icons</h3> */}
+                        <i className="fab fa-instagram social-icon ml-auto"></i>
+                        <i className="fab fa-facebook-square social-icon"></i>
+                        <i className="fab fa-twitter-square social-icon mr-auto"></i>
                     </div>
                 </div>
                 <div className="row mt-4">
