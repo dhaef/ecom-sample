@@ -12,7 +12,6 @@ const Product = ({ product }) => {
     currentlyInWishlist: { hasError: false, msg: "Item already in wish list" },
     size: { hasError: false, msg: "Select a size" },
     quantity: { hasError: false, msg: "Select a quantity" },
-    outOfStock: { hasError: false, msg: "Item out of stock" },
     insufficientStock: { hasError: false, msg: "Insufficient Stock" }
   });
 
@@ -20,7 +19,6 @@ const Product = ({ product }) => {
     const errors = {
       size: { hasError: !size, msg: "Select a size" },
       quantity: { hasError: quantity < 1, msg: "Select a quantity" },
-      outOfStock: { hasError: inventory[size] < 1, msg: "Item out of stock" },
       insufficientStock: { hasError: inventory[size] < quantity, msg: "Insufficient Stock" }
     };
     const errorMsgs = [];
@@ -52,7 +50,12 @@ const Product = ({ product }) => {
   const handleWishClick = e => {
     const currentlyInWishlist = state.wishList.find(product => product.id === id);
     if (currentlyInWishlist) {
-      setFormErrors({ ...formErrors, currentlyInWishlist: true });
+      setFormErrors({
+        ...formErrors, currentlyInWishlist: {
+          ...formErrors.currentlyInWishlist,
+          hasError: true
+        }
+      });
     } else {
       const updatedWishList = state.wishList.concat({ ...product });
       window.localStorage.setItem('wishList', JSON.stringify(updatedWishList));
@@ -62,7 +65,9 @@ const Product = ({ product }) => {
 
   return (
     <div className="card" style={{ position: 'relative' }}>
-      <img className="card-img-top" src={img} alt="Card cap" style={{ height: '10rem', objectFit: 'cover' }} />
+      <Link to={`/product/${id}`}>
+        <img className="card-img-top" src={img} alt="Card cap" style={{ height: '10rem', objectFit: 'cover' }} />
+      </Link>
       <div
         className="card-body">
         <h4 className="card-title text-center text-heavy">
@@ -70,9 +75,9 @@ const Product = ({ product }) => {
             {name}
           </Link>
         </h4>
-        {formErrors.size.hasError ? <h6 className="card-text alert-msg text-center">Please select your size</h6> : ''}
+        {formErrors.size.hasError && <h6 className="card-text alert-msg text-center">{formErrors.size.msg}</h6>}
         <p
-          className={`text-center
+          className={`text-center pick-size
                     ${formErrors.size.hasError ? 'invalid' : ''}
                   `}
         >
@@ -112,7 +117,7 @@ const Product = ({ product }) => {
             L
                     </span>
         </p>
-        {formErrors.quantity.hasError ? <h6 className="card-text alert-msg text-center">Please select a Qty</h6> : ''}
+        {formErrors.quantity.hasError && <h6 className="card-text alert-msg text-center">{formErrors.quantity.msg}</h6>}
         <div
           className={`
                     card-text
@@ -133,9 +138,10 @@ const Product = ({ product }) => {
         <p className="card-text text-center text-heavy">Price: ${price}</p>
         {formErrors.insufficientStock.hasError && (
           <h6 className="card-text alert-msg text-center">
-            Insufficient stock
+            {formErrors.insufficientStock.msg}
           </h6>
         )}
+        {/* {formErrors.currentlyInWishlist.hasError && <h6 className="card-text alert-msg text-center mb-2">{formErrors.currentlyInWishlist.msg}</h6>} */}
         <button
           className="btn btn-dark text-heavy"
           style={{ width: '100%' }}
@@ -157,7 +163,6 @@ const Product = ({ product }) => {
         >
           {state.wishList.find(item => item.id === id) ? '❤️' : '🤍'}
         </span>
-        {/* {formErrors.currentlyInWishlist.hasError && <span className="card-text">Product on wish list</span>} */}
       </div>
     </div>
   )

@@ -19,7 +19,7 @@ const WishList = () => {
     };
 
     return (
-        <Modal show={state.showWishList} animation={false}>
+        <Modal show={state.showWishList} animation={false} scrollable={true}>
             <Modal.Header>
                 <Modal.Title>
                     Your Wish List
